@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
     private Retrofit retrofit;
 
-    public ApiRepo getMovie(){
+    public ApiRepo getUrl(){
         if (retrofit == null){
             retrofit = new Retrofit
                     .Builder()

@@ -16,8 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.gogxi.gogxifilms.R;
+import com.gogxi.gogxifilms.data.model.MoviePlayNow;
 import com.gogxi.gogxifilms.data.model.MoviePopular;
+import com.gogxi.gogxifilms.ui.adapter.MovieNowAdapter;
 import com.gogxi.gogxifilms.ui.adapter.MoviePopularAdapter;
+import com.gogxi.gogxifilms.viewmodel.MovieNowVM;
 import com.gogxi.gogxifilms.viewmodel.MoviePopularVM;
 
 import java.util.ArrayList;
@@ -27,6 +30,11 @@ public class MovieFragment extends Fragment {
     private MoviePopularAdapter moviePopularAdapter;
     private RecyclerView rvMoviePopular;
     private MoviePopularVM moviePopularVM;
+
+    private MovieNowAdapter movieNowAdapter;
+    private RecyclerView rvMovieNow;
+    private MovieNowVM movieNowVM;
+
     private ProgressBar progressBar;
 
     public MovieFragment() {
@@ -46,20 +54,24 @@ public class MovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        rvMoviePopular = view.findViewById(R.id.rvMoviePopular);
+        rvMovieNow = view.findViewById(R.id.rvMoviePlayNow);
+
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        getPopular();
+        getNow();
+    }
+
+    private void getPopular(){
         moviePopularAdapter = new MoviePopularAdapter(getContext());
         moviePopularAdapter.notifyDataSetChanged();
-
-        rvMoviePopular = view.findViewById(R.id.rvMoviePopular);
-   //     rvMoviePopular.setLayoutManager(new GridLayoutManager(getContext(), 3));
         rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-
+        //     rvMoviePopular.setLayoutManager(new GridLayoutManager(getContext(), 3));
         moviePopularVM = new ViewModelProvider(this).get(MoviePopularVM.class);
         moviePopularVM.setMoviePopular();
         moviePopularVM.getMoviePopular().observe(this,getMoviePopular);
-
         rvMoviePopular.setAdapter(moviePopularAdapter);
     }
 
@@ -68,6 +80,26 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<MoviePopular> moviePopular) {
             if (moviePopular != null){
                 moviePopularAdapter.setData(moviePopular);
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
+
+    private void getNow(){
+        movieNowAdapter = new MovieNowAdapter(getContext());
+        movieNowAdapter.notifyDataSetChanged();
+        rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        movieNowVM = new ViewModelProvider(this).get(MovieNowVM.class);
+        movieNowVM.setMovieNow();
+        movieNowVM.getMovieNow().observe(this,getMovieNow);
+        rvMovieNow.setAdapter(movieNowAdapter);
+    }
+
+    private Observer<ArrayList<MoviePlayNow>> getMovieNow = new Observer<ArrayList<MoviePlayNow>>() {
+        @Override
+        public void onChanged(ArrayList<MoviePlayNow> movieNow) {
+            if (movieNow != null){
+                movieNowAdapter.setData(movieNow);
                 progressBar.setVisibility(View.INVISIBLE);
             }
         }

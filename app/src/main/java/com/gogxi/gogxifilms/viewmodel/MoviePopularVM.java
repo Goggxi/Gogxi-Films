@@ -25,7 +25,7 @@ public class MoviePopularVM extends ViewModel {
         if (this.api == null){
             api = new Api();
         }
-        api.getMovie().getMoviePopulars().enqueue(new Callback<MoviePopularResponse>() {
+        api.getUrl().getMoviePopulars().enqueue(new Callback<MoviePopularResponse>() {
 
             @Override
             public void onResponse(Call<MoviePopularResponse> call, Response<MoviePopularResponse> response) {
