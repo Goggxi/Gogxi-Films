@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,7 +69,6 @@ public class MovieFragment extends Fragment {
         moviePopularAdapter = new MoviePopularAdapter(getContext());
         moviePopularAdapter.notifyDataSetChanged();
         rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        //     rvMoviePopular.setLayoutManager(new GridLayoutManager(getContext(), 3));
         moviePopularVM = new ViewModelProvider(this).get(MoviePopularVM.class);
         moviePopularVM.setMoviePopular();
         moviePopularVM.getMoviePopular().observe(this,getMoviePopular);
@@ -88,7 +88,8 @@ public class MovieFragment extends Fragment {
     private void getNow(){
         movieNowAdapter = new MovieNowAdapter(getContext());
         movieNowAdapter.notifyDataSetChanged();
-        rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+//        rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        rvMovieNow.setLayoutManager(new GridLayoutManager(getContext(), 3));
         movieNowVM = new ViewModelProvider(this).get(MovieNowVM.class);
         movieNowVM.setMovieNow();
         movieNowVM.getMovieNow().observe(this,getMovieNow);
