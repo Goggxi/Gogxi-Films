@@ -9,12 +9,13 @@
     android:orientation="vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img_poster_movie"
+            android:id="@+id/img_poster_item"
             app:riv_corner_radius="8dp"
             android:layout_height="180dp"
+            android:src="@drawable/ic_launcher_background"
             android:layout_width="match_parent" />
         <TextView
-            android:id="@+id/tv_title_movie"
+            android:id="@+id/tv_title_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Title"
@@ -32,7 +33,7 @@
                     android:src="@drawable/ic_star"
                     android:contentDescription="rate" />
                 <TextView
-                    android:id="@+id/tv_rate_movie"
+                    android:id="@+id/tv_rate_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"

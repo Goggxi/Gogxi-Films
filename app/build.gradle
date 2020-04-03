@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String", "API_KEY", '"d8e957a69af1be921c9c4466f5661e87"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     def lifecycle_version = "2.2.0"
-    def arch_version = "2.1.0"
+
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData

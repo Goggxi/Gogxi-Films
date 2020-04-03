@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.ui.model.MoviePopularResult;
+import com.gogxi.gogxifilms.data.model.MoviePopular;
 
 import java.util.ArrayList;
 
 public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapter.ViewHolder> {
 
-    private ArrayList<MoviePopularResult> moviePopularResults = new ArrayList<>();
+    private ArrayList<MoviePopular> moviePopular = new ArrayList<>();
     private Context context;
 
     private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
@@ -27,32 +27,32 @@ public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapte
         this.context = context;
     }
 
-    public void setData(ArrayList<MoviePopularResult> items){
-        moviePopularResults.clear();
-        moviePopularResults.addAll(items);
+    public void setData(ArrayList<MoviePopular> items){
+        moviePopular.clear();
+        moviePopular.addAll(items);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MoviePopularAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_movie_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MoviePopularAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(BASE_IMAGE_URL+moviePopularResults.get(position)
+        Glide.with(context).load(BASE_IMAGE_URL+moviePopular.get(position)
                 .getPosterPath())
                 .into(holder.imgPosterMovie);
 
-        holder.tvTitleMovie.setText(moviePopularResults.get(position).getTitle());
-        holder.tvRateMovie.setText(String.valueOf(moviePopularResults.get(position).getVoteAverage()));
+        holder.tvTitleMovie.setText(moviePopular.get(position).getTitle());
+        holder.tvRateMovie.setText(String.valueOf(moviePopular.get(position).getVoteAverage()));
     }
 
     @Override
     public int getItemCount() {
-        return moviePopularResults.size();
+        return moviePopular.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,9 +61,9 @@ public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgPosterMovie = itemView.findViewById(R.id.img_poster_movie);
-            tvTitleMovie = itemView.findViewById(R.id.tv_title_movie);
-            tvRateMovie = itemView.findViewById(R.id.tv_rate_movie);
+            imgPosterMovie = itemView.findViewById(R.id.img_poster_popular);
+            tvTitleMovie = itemView.findViewById(R.id.tv_title_popular);
+            tvRateMovie = itemView.findViewById(R.id.tv_rate_popular);
         }
     }
 }

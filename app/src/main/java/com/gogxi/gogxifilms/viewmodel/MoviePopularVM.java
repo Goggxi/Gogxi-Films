@@ -1,12 +1,14 @@
 package com.gogxi.gogxifilms.viewmodel;
 
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+
+import com.gogxi.gogxifilms.data.response.MoviePopularResponse;
+import com.gogxi.gogxifilms.data.model.MoviePopular;
 import com.gogxi.gogxifilms.data.network.Api;
-import com.gogxi.gogxifilms.ui.model.MoviePopular;
-import com.gogxi.gogxifilms.ui.model.MoviePopularResult;
 
 import java.util.ArrayList;
 
@@ -17,31 +19,31 @@ import retrofit2.Response;
 public class MoviePopularVM extends ViewModel {
     private Api api;
 
-    private MutableLiveData<ArrayList<MoviePopularResult>> data = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<MoviePopular>> data = new MutableLiveData<>();
 
     public void setMoviePopular(){
         if (this.api == null){
             api = new Api();
         }
-        api.getMoviePopular().getMovieDiscover().enqueue(new Callback<MoviePopular>() {
+        api.getMovie().getMoviePopulars().enqueue(new Callback<MoviePopularResponse>() {
 
             @Override
-            public void onResponse(Call<MoviePopular> call, Response<MoviePopular> response) {
-                MoviePopular moviePopular = response.body();
-                if (moviePopular != null && moviePopular.getResults() != null){
-                    ArrayList<MoviePopularResult> moviePopularResults = moviePopular.getResults();
-                    data.postValue(moviePopularResults);
+            public void onResponse(Call<MoviePopularResponse> call, Response<MoviePopularResponse> response) {
+                MoviePopularResponse moviePopularResponse = response.body();
+                if (moviePopularResponse != null && moviePopularResponse.getResults() != null){
+                    ArrayList<MoviePopular> moviePopular = moviePopularResponse.getResults();
+                    data.postValue(moviePopular);
                 }
             }
 
             @Override
-            public void onFailure(Call<MoviePopular> call, Throwable t) {
+            public void onFailure(Call<MoviePopularResponse> call, Throwable t) {
 
             }
         });
     }
 
-    public LiveData<ArrayList<MoviePopularResult>> getMoviePopular(){
+    public LiveData<ArrayList<MoviePopular>> getMoviePopular(){
         return data;
     }
 }

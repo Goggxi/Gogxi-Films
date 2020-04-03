@@ -1,10 +1,12 @@
-package com.gogxi.gogxifilms.ui.model;
+package com.gogxi.gogxifilms.data.response;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gogxi.gogxifilms.data.model.MoviePopular;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePopular{
+public class MoviePopularResponse {
 
 	@SerializedName("page")
 	private int page;
@@ -13,7 +15,7 @@ public class MoviePopular{
 	private int totalPages;
 
 	@SerializedName("results")
-	private ArrayList<MoviePopularResult> results;
+	private ArrayList<MoviePopular> results;
 
 	@SerializedName("total_results")
 	private int totalResults;
@@ -34,11 +36,11 @@ public class MoviePopular{
 		return totalPages;
 	}
 
-	public void setResults(ArrayList<MoviePopularResult> results){
+	public void setResults(ArrayList<MoviePopular> results){
 		this.results = results;
 	}
 
-	public ArrayList<MoviePopularResult> getResults(){
+	public ArrayList<MoviePopular> getResults(){
 		return results;
 	}
 

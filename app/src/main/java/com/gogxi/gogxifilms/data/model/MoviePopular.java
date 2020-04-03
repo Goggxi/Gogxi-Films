@@ -1,9 +1,9 @@
-package com.gogxi.gogxifilms.ui.model;
+package com.gogxi.gogxifilms.data.model;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePopularResult {
+public class MoviePopular {
 
 	@SerializedName("overview")
 	private String overview;

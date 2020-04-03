@@ -1,6 +1,7 @@
 package com.gogxi.gogxifilms.data.network;
 
-import com.gogxi.gogxifilms.data.repository.MoviePopularRepo;
+
+import com.gogxi.gogxifilms.data.repository.ApiRepo;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -8,16 +9,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
     private Retrofit retrofit;
 
-    public MoviePopularRepo getMoviePopular(){
-        String BASE_URL = "https://api.themoviedb.org/";
+    public ApiRepo getMovie(){
         if (retrofit == null){
             retrofit = new Retrofit
                     .Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(ApiRepo.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-        return retrofit.create(MoviePopularRepo.class);
+        return retrofit.create(ApiRepo.class);
     }
 
     //tv show
