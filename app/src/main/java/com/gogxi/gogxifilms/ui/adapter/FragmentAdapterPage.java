@@ -1,4 +1,4 @@
-package com.gogxi.gogxifilms.adapter;
+package com.gogxi.gogxifilms.ui.adapter;
 
 
 import android.content.Context;
@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.fragment.MovieFragment;
-import com.gogxi.gogxifilms.fragment.TvShowFragment;
+import com.gogxi.gogxifilms.ui.fragment.MovieFragment;
+import com.gogxi.gogxifilms.ui.fragment.TvShowFragment;
 
 public class FragmentAdapterPage extends FragmentPagerAdapter {
     private final Context mContext;

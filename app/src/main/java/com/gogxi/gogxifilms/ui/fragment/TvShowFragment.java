@@ -1,4 +1,4 @@
-package com.gogxi.gogxifilms.fragment;
+package com.gogxi.gogxifilms.ui.fragment;
 
 import android.os.Bundle;
 
@@ -13,9 +13,9 @@ import com.gogxi.gogxifilms.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment {
+public class TvShowFragment extends Fragment {
 
-    public MovieFragment() {
+    public TvShowFragment() {
         // Required empty public constructor
     }
 
@@ -24,6 +24,6 @@ public class MovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_tv_show, container, false);
     }
 }

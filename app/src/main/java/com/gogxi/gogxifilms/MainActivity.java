@@ -7,7 +7,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.gogxi.gogxifilms.adapter.FragmentAdapterPage;
+
+import com.gogxi.gogxifilms.ui.adapter.FragmentAdapterPage;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 
