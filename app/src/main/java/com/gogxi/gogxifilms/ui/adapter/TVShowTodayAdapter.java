@@ -12,12 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.data.model.MoviePopular;
 import com.gogxi.gogxifilms.data.model.TVShow;
 
 import java.util.ArrayList;
 
-public class TVShowAdapter extends RecyclerView.Adapter<TVShowAdapter.ViewHolder> {
+public class TVShowTodayAdapter extends RecyclerView.Adapter<TVShowTodayAdapter.ViewHolder> {
 
     private ArrayList<TVShow> tvShows = new ArrayList<>();
     private Context context;
@@ -26,7 +25,7 @@ public class TVShowAdapter extends RecyclerView.Adapter<TVShowAdapter.ViewHolder
 
 
 
-    public TVShowAdapter(Context context) {
+    public TVShowTodayAdapter(Context context) {
         this.context = context;
     }
 
@@ -38,13 +37,13 @@ public class TVShowAdapter extends RecyclerView.Adapter<TVShowAdapter.ViewHolder
 
     @NonNull
     @Override
-    public TVShowAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TVShowTodayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tv,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TVShowAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TVShowTodayAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(BASE_IMAGE_URL+tvShows.get(position)
                 .getPosterPath())
                 .into(holder.imgPoster);

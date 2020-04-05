@@ -19,4 +19,8 @@ public interface ApiRepo {
     Call<MoviePlayNowResponse> gedMoviePlayNow();
     @GET("3/tv/popular?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
     Call<TVShowResponse> getTVShowPopular();
+    @GET("3/tv/top_rated?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
+    Call<TVShowResponse> getTVShowToprRated();
+    @GET("3/tv/airing_today?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
+    Call<TVShowResponse> getTVShowTodayr();
 }

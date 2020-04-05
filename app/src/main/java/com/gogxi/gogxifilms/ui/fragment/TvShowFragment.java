@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.TVShow;
 import com.gogxi.gogxifilms.ui.adapter.TVShowAdapter;
+import com.gogxi.gogxifilms.ui.adapter.TVShowTodayAdapter;
+import com.gogxi.gogxifilms.ui.adapter.TVShowTopAdapter;
 import com.gogxi.gogxifilms.viewmodel.TVShowPopularVM;
+import com.gogxi.gogxifilms.viewmodel.TVShowTodayVM;
+import com.gogxi.gogxifilms.viewmodel.TVShowTopVM;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.ArrayList;
@@ -26,8 +30,12 @@ import java.util.ArrayList;
  */
 public class TvShowFragment extends Fragment {
     private TVShowAdapter tvShowAdapter;
-    private MultiSnapRecyclerView rvTvPopular;
+    private TVShowTopAdapter tvShowTopAdapter;
+    private TVShowTodayAdapter tvShowTodayAdapter;
+    private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
     private TVShowPopularVM tvShowPopularVM;
+    private TVShowTopVM tvShowTopVM;
+    private TVShowTodayVM tvShowTodayVM;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -46,8 +54,12 @@ public class TvShowFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvTvPopular = view.findViewById(R.id.first_recycler_view);
+        rvTvTop = view.findViewById(R.id.second_recycler_view);
+        rvTvToday = view.findViewById(R.id.third_recycler_view);
 
         getPopular();
+        getTop();
+        getToday();
     }
 
     private void getPopular(){
@@ -56,15 +68,53 @@ public class TvShowFragment extends Fragment {
         rvTvPopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         tvShowPopularVM = new ViewModelProvider(this).get(TVShowPopularVM.class);
         tvShowPopularVM.setTvPopular();
-        tvShowPopularVM.getTvPopular().observe(this,getTvPopular);
+        tvShowPopularVM.getTvPopular().observe(this,getTvShow);
         rvTvPopular.setAdapter(tvShowAdapter);
     }
 
-    private Observer<ArrayList<TVShow>> getTvPopular = new Observer<ArrayList<TVShow>>() {
+    private Observer<ArrayList<TVShow>> getTvShow = new Observer<ArrayList<TVShow>>() {
         @Override
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowAdapter.setData(tvPopular);
+            }
+        }
+    };
+
+    private void getTop(){
+        tvShowTopAdapter = new TVShowTopAdapter(getContext());
+        tvShowTopAdapter.notifyDataSetChanged();
+        rvTvTop.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        tvShowTopVM = new ViewModelProvider(this).get(TVShowTopVM.class);
+        tvShowTopVM.setTvTop();
+        tvShowTopVM.getTvTop().observe(this,getTvShowk);
+        rvTvTop.setAdapter(tvShowTopAdapter);
+    }
+
+    private Observer<ArrayList<TVShow>> getTvShowk = new Observer<ArrayList<TVShow>>() {
+        @Override
+        public void onChanged(ArrayList<TVShow> tvPopular) {
+            if (tvPopular != null){
+                tvShowTopAdapter.setData(tvPopular);
+            }
+        }
+    };
+
+    private void getToday(){
+        tvShowTodayAdapter = new TVShowTodayAdapter(getContext());
+        tvShowTodayAdapter.notifyDataSetChanged();
+        rvTvToday.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        tvShowTodayVM = new ViewModelProvider(this).get(TVShowTodayVM.class);
+        tvShowTodayVM.setTvToday();
+        tvShowTodayVM.getTvToday().observe(this,getTvShowkk);
+        rvTvToday.setAdapter(tvShowTodayAdapter);
+    }
+
+    private Observer<ArrayList<TVShow>> getTvShowkk = new Observer<ArrayList<TVShow>>() {
+        @Override
+        public void onChanged(ArrayList<TVShow> tvPopular) {
+            if (tvPopular != null){
+                tvShowTodayAdapter.setData(tvPopular);
             }
         }
     };

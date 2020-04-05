@@ -68,7 +68,8 @@ public class MovieFragment extends Fragment {
     private void getPopular(){
         moviePopularAdapter = new MoviePopularAdapter(getContext());
         moviePopularAdapter.notifyDataSetChanged();
-        rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        rvMoviePopular.setLayoutManager(new GridLayoutManager(getContext(), 3));
+//        rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         moviePopularVM = new ViewModelProvider(this).get(MoviePopularVM.class);
         moviePopularVM.setMoviePopular();
         moviePopularVM.getMoviePopular().observe(this,getMoviePopular);
@@ -88,8 +89,8 @@ public class MovieFragment extends Fragment {
     private void getNow(){
         movieNowAdapter = new MovieNowAdapter(getContext());
         movieNowAdapter.notifyDataSetChanged();
-//        rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        rvMovieNow.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+//        rvMovieNow.setLayoutManager(new GridLayoutManager(getContext(), 3));
         movieNowVM = new ViewModelProvider(this).get(MovieNowVM.class);
         movieNowVM.setMovieNow();
         movieNowVM.getMovieNow().observe(this,getMovieNow);
