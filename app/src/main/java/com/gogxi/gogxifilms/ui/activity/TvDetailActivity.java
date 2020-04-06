@@ -3,6 +3,7 @@ package com.gogxi.gogxifilms.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class TvDetailActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     TextView title,release,language,rate,storyline;
     ImageView poster, backDrop;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,11 @@ public class TvDetailActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("loading ...");
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
         title = findViewById(R.id.tv_title);
         release = findViewById(R.id.tv_release);
         language = findViewById(R.id.tv_language);
@@ -47,7 +54,15 @@ public class TvDetailActivity extends AppCompatActivity {
         backDrop = findViewById(R.id.img_detail_photo_banner);
 
         tvShow = getIntent().getParcelableExtra(EXTRA_TV);
+        setData();
 
+        if (getSupportActionBar() != null ){
+            getSupportActionBar().setTitle(R.string.details);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void setData(){
         if (tvShow != null){
             title.setText(tvShow.getName());
             language.setText(tvShow.getOriginalLanguage());
@@ -63,11 +78,7 @@ public class TvDetailActivity extends AppCompatActivity {
                     .into(backDrop);
             getReleaseDate();
         }
-
-        if (getSupportActionBar() != null ){
-            getSupportActionBar().setTitle(R.string.details);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        dialog.dismiss();
     }
 
     private void getReleaseDate() {

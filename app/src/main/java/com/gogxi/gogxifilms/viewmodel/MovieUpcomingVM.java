@@ -1,6 +1,8 @@
 package com.gogxi.gogxifilms.viewmodel;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.gogxi.gogxifilms.data.model.Movie;
 import com.gogxi.gogxifilms.data.network.Api;
 import com.gogxi.gogxifilms.data.response.MovieResponse;
+import com.gogxi.gogxifilms.ui.activity.MainActivity;
 
 import java.util.ArrayList;
 
@@ -17,27 +20,33 @@ import retrofit2.Response;
 
 public class MovieUpcomingVM extends ViewModel {
     private Api api;
-
+    private static final String TAG = MainActivity.class.getSimpleName();
     private MutableLiveData<ArrayList<Movie>> data = new MutableLiveData<>();
 
-    public void setMovieUpcoming(){
+    public void setMovieUpcoming(String language){
         if (this.api == null){
             api = new Api();
         }
-        api.getUrl().getMovieUpcoming().enqueue(new Callback<MovieResponse>() {
+        api.getUrl().getMovieUpcoming(language).enqueue(new Callback<MovieResponse>() {
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                Log.d(TAG, "onResponse: ");
                 MovieResponse movieResponse = response.body();
-                if (movieResponse != null && movieResponse.getResults() != null){
-                    ArrayList<Movie> movie = movieResponse.getResults();
-                    data.postValue(movie);
+                try {
+                    if (movieResponse != null && movieResponse.getResults() != null) {
+                        ArrayList<Movie> movie = movieResponse.getResults();
+                        data.postValue(movie);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: ");
             }
         });
     }

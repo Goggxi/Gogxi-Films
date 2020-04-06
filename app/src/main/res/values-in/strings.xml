@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Gogxi Films</string>
+
+    <string name="title_1">Film</string>
+    <string name="title_2">Serial TV</string>
+    <string name="language">id-ID</string>
+    <string name="details">Detail</string>
+    <string name="airing_today">Sedang Tayang</string>
+    <string name="top_rated">Top Rating</string>
+    <string name="popular">Populer</string>
+    <string name="play_now">Sedang Diputar</string>
+    <string name="upcoming">Mendatang</string>
+    <string name="storyline">Kilasan Singkat</string>
+    <string name="language_setting">Pengaturan Bahasa</string>
+
+    <string name="banner" translatable="false">banner</string>
+    <string name="rate" translatable="false">rate</string>
+    <string name="lang" translatable="false">lang</string>
+</resources>

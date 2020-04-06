@@ -10,9 +10,10 @@
     <string name="popular">Popular</string>
     <string name="play_now">Play Now</string>
     <string name="upcoming">Upcoming</string>
-    <string name="banner">banner</string>
-    <string name="rate">rate</string>
-    <string name="lang">lang</string>
-    <string name="storyline">storyline</string>
+    <string name="storyline">Overview</string>
     <string name="language_setting">language_setting</string>
+
+    <string name="banner" translatable="false">banner</string>
+    <string name="rate" translatable="false">rate</string>
+    <string name="lang" translatable="false">lang</string>
 </resources>

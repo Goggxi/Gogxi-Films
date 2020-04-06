@@ -7,21 +7,20 @@ import com.gogxi.gogxifilms.data.response.TVShowResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ApiRepo {
- //   String BASE_URL = "https://api.themoviedb.org/";
-    int LANG = R.string.language;
 
-    @GET("3/movie/popular?api_key="+ BuildConfig.API_KEY +"&language="+ LANG)
-    Call<MovieResponse> getMoviePopulars();
-    @GET("3/movie/now_playing?api_key="+ BuildConfig.API_KEY +"&language="+ LANG)
-    Call<MovieResponse> getMoviePlayNow();
-    @GET("3/movie/upcoming?api_key="+ BuildConfig.API_KEY +"&language="+ LANG)
-    Call<MovieResponse> getMovieUpcoming();
-    @GET("3/tv/popular?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
-    Call<TVShowResponse> getTVShowPopular();
-    @GET("3/tv/top_rated?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
-    Call<TVShowResponse> getTVShowToprRated();
-    @GET("3/tv/airing_today?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
-    Call<TVShowResponse> getTVShowToday();
+    @GET("3/movie/popular?api_key="+ BuildConfig.API_KEY )
+    Call<MovieResponse> getMoviePopulars(@Query("language") String language);
+    @GET("3/movie/now_playing?api_key="+ BuildConfig.API_KEY )
+    Call<MovieResponse> getMoviePlayNow(@Query("language") String language);
+    @GET("3/movie/upcoming?api_key="+ BuildConfig.API_KEY )
+    Call<MovieResponse> getMovieUpcoming(@Query("language") String language);
+    @GET("3/tv/popular?api_key="+ BuildConfig.API_KEY )
+    Call<TVShowResponse> getTVShowPopular(@Query("language") String language);
+    @GET("3/tv/top_rated?api_key="+ BuildConfig.API_KEY )
+    Call<TVShowResponse> getTVShowToprRated(@Query("language") String language);
+    @GET("3/tv/airing_today?api_key="+ BuildConfig.API_KEY )
+    Call<TVShowResponse> getTVShowToday(@Query("language") String language);
 }
