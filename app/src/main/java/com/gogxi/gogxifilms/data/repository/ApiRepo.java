@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiRepo {
-    String BASE_URL = "https://api.themoviedb.org/";
+ //   String BASE_URL = "https://api.themoviedb.org/";
     int LANG = R.string.language;
 
     @GET("3/movie/popular?api_key="+ BuildConfig.API_KEY +"&language="+ LANG)

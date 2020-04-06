@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+// Define Variable API Key
+def STRING = 'String'
+def TMDB_API_KEY = '"' + API_KEY + '"' ?: '"Define your The Movie DB API Key!"'
+def BASE_URL = '"' + BASE_URL + '"' ?: '"Define your URL Movie DB!"'
+def POSTER_PATH = '"' + POSTER + '"' ?: '"Define your POSTER PATH URL Movie DB!"'
+def BACKDROP_PATH = '"' + BACKDROP + '"' ?: '"Define your BACKDROP PATH URL Movie DB!"'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -10,9 +17,15 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "API_KEY", '"d8e957a69af1be921c9c4466f5661e87"')
-        buildConfigField("String", "IMG_URL", '"https://image.tmdb.org/t/p/w185"')
+//        buildConfigField("String", "API_KEY", '"d8e957a69af1be921c9c4466f5661e87"')
+//        buildConfigField("String", "IMG_URL", '"https://image.tmdb.org/t/p/w185"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        each { type ->
+            type.buildConfigField STRING, 'API_KEY', TMDB_API_KEY
+            type.buildConfigField STRING, 'BASE_URL', BASE_URL
+            type.buildConfigField STRING, 'POSTER', POSTER_PATH
+            type.buildConfigField STRING, 'BACKDROP', BACKDROP_PATH
+        }
     }
 
     buildTypes {

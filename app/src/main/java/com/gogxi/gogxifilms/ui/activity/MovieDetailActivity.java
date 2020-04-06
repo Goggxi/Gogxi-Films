@@ -47,7 +47,7 @@ public class MovieDetailActivity extends AppCompatActivity {
       //  genreMovie.setText(movie.getGenreMovie());
         storylineMovie.setText(movie.getOverview());
         Glide.with(this)
-                .load( BuildConfig.IMG_URL + movie.getPosterPath())
+                .load( BuildConfig.POSTER + movie.getPosterPath())
                 .apply(new RequestOptions().override(150, 350))
                 .into(posterMovie);
     }
