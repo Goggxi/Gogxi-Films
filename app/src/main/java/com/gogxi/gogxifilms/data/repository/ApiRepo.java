@@ -1,7 +1,6 @@
 package com.gogxi.gogxifilms.data.repository;
 
 import com.gogxi.gogxifilms.BuildConfig;
-import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.response.MovieResponse;
 import com.gogxi.gogxifilms.data.response.TVShowResponse;
 
