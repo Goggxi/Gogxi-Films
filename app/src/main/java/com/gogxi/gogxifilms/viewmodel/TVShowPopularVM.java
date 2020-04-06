@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.gogxi.gogxifilms.data.model.MoviePlayNow;
+
 import com.gogxi.gogxifilms.data.model.TVShow;
 import com.gogxi.gogxifilms.data.network.Api;
-import com.gogxi.gogxifilms.data.response.MoviePlayNowResponse;
 import com.gogxi.gogxifilms.data.response.TVShowResponse;
 
 import java.util.ArrayList;

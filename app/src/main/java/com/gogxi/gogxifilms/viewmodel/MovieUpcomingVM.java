@@ -15,16 +15,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieNowVM extends ViewModel {
+public class MovieUpcomingVM extends ViewModel {
     private Api api;
 
     private MutableLiveData<ArrayList<Movie>> data = new MutableLiveData<>();
 
-    public void setMovieNow(){
+    public void setMovieUpcoming(){
         if (this.api == null){
             api = new Api();
         }
-        api.getUrl().getMoviePlayNow().enqueue(new Callback<MovieResponse>() {
+        api.getUrl().getMovieUpcoming().enqueue(new Callback<MovieResponse>() {
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -42,7 +42,7 @@ public class MovieNowVM extends ViewModel {
         });
     }
 
-    public LiveData<ArrayList<Movie>> getMovieNow(){
+    public LiveData<ArrayList<Movie>> getMovieUpcoming(){
         return data;
     }
 }

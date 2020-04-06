@@ -1,9 +1,12 @@
 package com.gogxi.gogxifilms.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePopular {
+public class Movie implements Parcelable {
 
 	@SerializedName("overview")
 	private String overview;
@@ -46,6 +49,34 @@ public class MoviePopular {
 
 	@SerializedName("vote_count")
 	private int voteCount;
+
+	protected Movie(Parcel in) {
+		overview = in.readString();
+		originalLanguage = in.readString();
+		originalTitle = in.readString();
+		video = in.readByte() != 0;
+		title = in.readString();
+		posterPath = in.readString();
+		backdropPath = in.readString();
+		releaseDate = in.readString();
+		popularity = in.readDouble();
+		voteAverage = in.readDouble();
+		id = in.readInt();
+		adult = in.readByte() != 0;
+		voteCount = in.readInt();
+	}
+
+	public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+		@Override
+		public Movie createFromParcel(Parcel in) {
+			return new Movie(in);
+		}
+
+		@Override
+		public Movie[] newArray(int size) {
+			return new Movie[size];
+		}
+	};
 
 	public void setOverview(String overview){
 		this.overview = overview;
@@ -179,4 +210,26 @@ public class MoviePopular {
 			",vote_count = '" + voteCount + '\'' + 
 			"}";
 		}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(overview);
+		dest.writeString(originalLanguage);
+		dest.writeString(originalTitle);
+		dest.writeByte((byte) (video ? 1 : 0));
+		dest.writeString(title);
+		dest.writeString(posterPath);
+		dest.writeString(backdropPath);
+		dest.writeString(releaseDate);
+		dest.writeDouble(popularity);
+		dest.writeDouble(voteAverage);
+		dest.writeInt(id);
+		dest.writeByte((byte) (adult ? 1 : 0));
+		dest.writeInt(voteCount);
+	}
 }

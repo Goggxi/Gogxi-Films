@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 
-import com.gogxi.gogxifilms.data.response.MoviePopularResponse;
-import com.gogxi.gogxifilms.data.model.MoviePopular;
+import com.gogxi.gogxifilms.data.model.Movie;
 import com.gogxi.gogxifilms.data.network.Api;
+import com.gogxi.gogxifilms.data.response.MovieResponse;
 
 import java.util.ArrayList;
 
@@ -19,31 +19,31 @@ import retrofit2.Response;
 public class MoviePopularVM extends ViewModel {
     private Api api;
 
-    private MutableLiveData<ArrayList<MoviePopular>> data = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> data = new MutableLiveData<>();
 
     public void setMoviePopular(){
         if (this.api == null){
             api = new Api();
         }
-        api.getUrl().getMoviePopulars().enqueue(new Callback<MoviePopularResponse>() {
+        api.getUrl().getMoviePopulars().enqueue(new Callback<MovieResponse>() {
 
             @Override
-            public void onResponse(Call<MoviePopularResponse> call, Response<MoviePopularResponse> response) {
-                MoviePopularResponse moviePopularResponse = response.body();
-                if (moviePopularResponse != null && moviePopularResponse.getResults() != null){
-                    ArrayList<MoviePopular> moviePopular = moviePopularResponse.getResults();
-                    data.postValue(moviePopular);
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                MovieResponse movieResponse = response.body();
+                if (movieResponse != null && movieResponse.getResults() != null){
+                    ArrayList<Movie> movie = movieResponse.getResults();
+                    data.postValue(movie);
                 }
             }
 
             @Override
-            public void onFailure(Call<MoviePopularResponse> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
 
             }
         });
     }
 
-    public LiveData<ArrayList<MoviePopular>> getMoviePopular(){
+    public LiveData<ArrayList<Movie>> getMoviePopular(){
         return data;
     }
 }

@@ -38,7 +38,7 @@ public class TVShowTodayAdapter extends RecyclerView.Adapter<TVShowTodayAdapter.
     @NonNull
     @Override
     public TVShowTodayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tv,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items,parent,false);
         return new ViewHolder(view);
     }
 
@@ -63,9 +63,9 @@ public class TVShowTodayAdapter extends RecyclerView.Adapter<TVShowTodayAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgPoster = itemView.findViewById(R.id.img_poster_item_tv);
-            tvTitle = itemView.findViewById(R.id.tv_title_item_tv);
-            tvRate = itemView.findViewById(R.id.tv_rate_item_tv);
+            imgPoster = itemView.findViewById(R.id.img_poster_items);
+            tvTitle = itemView.findViewById(R.id.tv_title_items);
+            tvRate = itemView.findViewById(R.id.tv_rate_items);
         }
     }
 }

@@ -2,13 +2,10 @@ package com.gogxi.gogxifilms.data.response;
 
 import java.util.ArrayList;
 
-import com.gogxi.gogxifilms.data.model.MoviePlayNow;
+import com.gogxi.gogxifilms.data.model.Movie;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePlayNowResponse {
-
-	@SerializedName("dates")
-	private MoviePlayNowDates dates;
+public class MovieResponse {
 
 	@SerializedName("page")
 	private int page;
@@ -17,18 +14,10 @@ public class MoviePlayNowResponse {
 	private int totalPages;
 
 	@SerializedName("results")
-	private ArrayList<MoviePlayNow> results;
+	private ArrayList<Movie> results;
 
 	@SerializedName("total_results")
 	private int totalResults;
-
-	public void setDates(MoviePlayNowDates dates){
-		this.dates = dates;
-	}
-
-	public MoviePlayNowDates getDates(){
-		return dates;
-	}
 
 	public void setPage(int page){
 		this.page = page;
@@ -46,11 +35,11 @@ public class MoviePlayNowResponse {
 		return totalPages;
 	}
 
-	public void setResults(ArrayList<MoviePlayNow> results){
+	public void setResults(ArrayList<Movie> results){
 		this.results = results;
 	}
 
-	public ArrayList<MoviePlayNow> getResults(){
+	public ArrayList<Movie> getResults(){
 		return results;
 	}
 
@@ -65,9 +54,8 @@ public class MoviePlayNowResponse {
 	@Override
  	public String toString(){
 		return 
-			"MoviePlayNow{" + 
-			"dates = '" + dates + '\'' + 
-			",page = '" + page + '\'' + 
+			"MoviePopular{" + 
+			"page = '" + page + '\'' + 
 			",total_pages = '" + totalPages + '\'' + 
 			",results = '" + results + '\'' + 
 			",total_results = '" + totalResults + '\'' + 

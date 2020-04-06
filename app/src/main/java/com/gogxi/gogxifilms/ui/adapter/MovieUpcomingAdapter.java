@@ -16,43 +16,43 @@ import com.gogxi.gogxifilms.data.model.Movie;
 
 import java.util.ArrayList;
 
-public class MovieNowAdapter extends RecyclerView.Adapter<MovieNowAdapter.ViewHolder> {
+public class MovieUpcomingAdapter extends RecyclerView.Adapter<MovieUpcomingAdapter.ViewHolder> {
 
-    private ArrayList<Movie> moviePlayNows = new ArrayList<>();
+    private ArrayList<Movie> movieUpcoming = new ArrayList<>();
     private Context context;
 
     private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
 
-    public MovieNowAdapter(Context context) {
+    public MovieUpcomingAdapter(Context context) {
         this.context = context;
     }
 
     public void setData(ArrayList<Movie> items){
-        moviePlayNows.clear();
-        moviePlayNows.addAll(items);
+        movieUpcoming.clear();
+        movieUpcoming.addAll(items);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public MovieNowAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieUpcomingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieNowAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(BASE_IMAGE_URL+moviePlayNows.get(position)
+    public void onBindViewHolder(@NonNull MovieUpcomingAdapter.ViewHolder holder, int position) {
+        Glide.with(context).load(BASE_IMAGE_URL+movieUpcoming.get(position)
                 .getPosterPath())
                 .into(holder.imgPosterMovie);
 
-        holder.tvTitleMovie.setText(moviePlayNows.get(position).getTitle());
-        holder.tvRateMovie.setText(String.valueOf(moviePlayNows.get(position).getVoteAverage()));
+        holder.tvTitleMovie.setText(movieUpcoming.get(position).getTitle());
+        holder.tvRateMovie.setText(String.valueOf(movieUpcoming.get(position).getVoteAverage()));
     }
 
     @Override
     public int getItemCount() {
-        return moviePlayNows.size();
+        return movieUpcoming.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
