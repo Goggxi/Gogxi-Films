@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,29 +66,13 @@ public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapte
         ImageView imgPosterMovie;
         TextView tvTitleMovie, tvRateMovie;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPosterMovie = itemView.findViewById(R.id.img_poster_items);
             tvTitleMovie = itemView.findViewById(R.id.tv_title_items);
             tvRateMovie = itemView.findViewById(R.id.tv_rate_items);
-
             itemView.setOnClickListener(this);
-//            itemView.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION){
-//                        Movie clickedDataItem = movie.get(pos);
-//                        Intent intent = new Intent(mContext, DetailActivity.class);
-//                        intent.putExtra("movies", clickedDataItem );
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getOriginalTitle(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
         }
-
 
         @Override
         public void onClick(View v) {

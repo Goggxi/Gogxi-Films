@@ -1,9 +1,12 @@
 package com.gogxi.gogxifilms.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class TVShow {
+public class TVShow implements Parcelable {
 
 	@SerializedName("first_air_date")
 	private String firstAirDate;
@@ -43,6 +46,33 @@ public class TVShow {
 
 	@SerializedName("vote_count")
 	private int voteCount;
+
+	protected TVShow(Parcel in) {
+		firstAirDate = in.readString();
+		overview = in.readString();
+		originalLanguage = in.readString();
+		posterPath = in.readString();
+		originCountry = in.createStringArrayList();
+		backdropPath = in.readString();
+		originalName = in.readString();
+		popularity = in.readDouble();
+		voteAverage = in.readDouble();
+		name = in.readString();
+		id = in.readInt();
+		voteCount = in.readInt();
+	}
+
+	public static final Creator<TVShow> CREATOR = new Creator<TVShow>() {
+		@Override
+		public TVShow createFromParcel(Parcel in) {
+			return new TVShow(in);
+		}
+
+		@Override
+		public TVShow[] newArray(int size) {
+			return new TVShow[size];
+		}
+	};
 
 	public void setFirstAirDate(String firstAirDate){
 		this.firstAirDate = firstAirDate;
@@ -167,4 +197,25 @@ public class TVShow {
 			",vote_count = '" + voteCount + '\'' + 
 			"}";
 		}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(firstAirDate);
+		dest.writeString(overview);
+		dest.writeString(originalLanguage);
+		dest.writeString(posterPath);
+		dest.writeStringList(originCountry);
+		dest.writeString(backdropPath);
+		dest.writeString(originalName);
+		dest.writeDouble(popularity);
+		dest.writeDouble(voteAverage);
+		dest.writeString(name);
+		dest.writeInt(id);
+		dest.writeInt(voteCount);
+	}
 }

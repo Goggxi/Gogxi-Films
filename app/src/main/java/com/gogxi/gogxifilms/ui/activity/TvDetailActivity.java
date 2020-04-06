@@ -1,19 +1,18 @@
 package com.gogxi.gogxifilms.ui.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.data.model.Movie;
+import com.gogxi.gogxifilms.data.model.TVShow;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.text.ParseException;
@@ -21,54 +20,45 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class TvDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MOVIE = "extra_movie";
-    Movie movie;
+    public static final String EXTRA_TV = "extra_tv";
+    TVShow tvShow;
 
     CollapsingToolbarLayout collapsingToolbarLayout;
 
-    TextView titleMovie,releaseMovie,languageMovie,rateMovie,storylineMovie;
-    ImageView posterMovie, backDrop;
+    TextView title,release,language,rate,storyline;
+    ImageView poster, backDrop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_tv_detail);
         collapsingToolbarLayout = findViewById(R.id.collapse_toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    //    getSupportActionBar().setHomeButtonEnabled(true);
-    //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        collapsingToolbarLayout.setTitle("Dicoding");
-
-//        collapsingToolbarLayout.setCollapsedTitleTextColor(
-//                ContextCompat.getColor(this, R.color.colorAccentLight));
-//        collapsingToolbarLayout.setExpandedTitleColor(
-//                ContextCompat.getColor(this, R.color.colorPrimary));
-
-        titleMovie = findViewById(R.id.tv_title);
-        releaseMovie = findViewById(R.id.tv_release);
-        languageMovie = findViewById(R.id.tv_language);
-        rateMovie = findViewById(R.id.tv_rate);
-        storylineMovie = findViewById(R.id.tv_storyline);
-        posterMovie = findViewById(R.id.iv_poster);
+        title = findViewById(R.id.tv_title);
+        release = findViewById(R.id.tv_release);
+        language = findViewById(R.id.tv_language);
+        rate = findViewById(R.id.tv_rate);
+        storyline = findViewById(R.id.tv_storyline);
+        poster = findViewById(R.id.iv_poster);
         backDrop = findViewById(R.id.img_detail_photo_banner);
 
-        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        tvShow = getIntent().getParcelableExtra(EXTRA_TV);
 
-        if (movie != null){
-            titleMovie.setText(movie.getTitle());
-            languageMovie.setText(movie.getOriginalLanguage());
-            rateMovie.setText(String.valueOf(movie.getVoteAverage()));
-            storylineMovie.setText(movie.getOverview());
+        if (tvShow != null){
+            title.setText(tvShow.getName());
+            language.setText(tvShow.getOriginalLanguage());
+            rate.setText(String.valueOf(tvShow.getVoteAverage()));
+            storyline.setText(tvShow.getOverview());
             Glide.with(this)
-                    .load( BuildConfig.POSTER + movie.getPosterPath())
+                    .load( BuildConfig.POSTER + tvShow.getPosterPath())
                     .apply(new RequestOptions().override(150, 350))
-                    .into(posterMovie);
+                    .into(poster);
             Glide.with(this)
-                    .load( BuildConfig.BACKDROP + movie.getBackdropPath())
+                    .load( BuildConfig.BACKDROP + tvShow.getBackdropPath())
                     .apply(new RequestOptions().override(500, 350))
                     .into(backDrop);
             getReleaseDate();
@@ -82,12 +72,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void getReleaseDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String date = movie.getReleaseDate();
+        String date = tvShow.getFirstAirDate();
         try {
             Date newDate = dateFormat.parse(date);
             dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
             assert newDate != null;
-            releaseMovie.setText(dateFormat.format(newDate));
+            release.setText(dateFormat.format(newDate));
         } catch (ParseException e) {
             e.printStackTrace();
         }
