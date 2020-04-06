@@ -24,9 +24,8 @@ public class TvDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_TV = "extra_tv";
     TVShow tvShow;
-
+    Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-
     TextView title,release,language,rate,storyline;
     ImageView poster, backDrop;
 
@@ -34,8 +33,9 @@ public class TvDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_detail);
+
         collapsingToolbarLayout = findViewById(R.id.collapse_toolbar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         title = findViewById(R.id.tv_title);

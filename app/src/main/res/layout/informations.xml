@@ -43,7 +43,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="rate"
+            android:contentDescription="@string/rate"
             android:src="@drawable/ic_star"
             app:layout_constraintStart_toEndOf="@+id/iv_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_release" />
@@ -66,7 +66,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="lang"
+            android:contentDescription="@string/lang"
             android:src="@drawable/ic_language"
             app:layout_constraintStart_toEndOf="@+id/iv_poster"
             app:layout_constraintTop_toBottomOf="@+id/iv_rate" />

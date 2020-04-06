@@ -25,9 +25,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     Movie movie;
-
+    Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
-
     TextView titleMovie,releaseMovie,languageMovie,rateMovie,storylineMovie;
     ImageView posterMovie, backDrop;
 
@@ -36,17 +35,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         collapsingToolbarLayout = findViewById(R.id.collapse_toolbar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    //    getSupportActionBar().setHomeButtonEnabled(true);
-    //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        collapsingToolbarLayout.setTitle("Dicoding");
-
-//        collapsingToolbarLayout.setCollapsedTitleTextColor(
-//                ContextCompat.getColor(this, R.color.colorAccentLight));
-//        collapsingToolbarLayout.setExpandedTitleColor(
-//                ContextCompat.getColor(this, R.color.colorPrimary));
 
         titleMovie = findViewById(R.id.tv_title);
         releaseMovie = findViewById(R.id.tv_release);

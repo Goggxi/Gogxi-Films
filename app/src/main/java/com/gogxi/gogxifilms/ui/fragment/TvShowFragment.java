@@ -33,9 +33,6 @@ public class TvShowFragment extends Fragment {
     private TVShowTopAdapter tvShowTopAdapter;
     private TVShowTodayAdapter tvShowTodayAdapter;
     private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
-    private TVShowPopularVM tvShowPopularVM;
-    private TVShowTopVM tvShowTopVM;
-    private TVShowTodayVM tvShowTodayVM;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -66,13 +63,13 @@ public class TvShowFragment extends Fragment {
         tvShowAdapter = new TVShowAdapter(getContext());
         tvShowAdapter.notifyDataSetChanged();
         rvTvPopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        tvShowPopularVM = new ViewModelProvider(this).get(TVShowPopularVM.class);
+        TVShowPopularVM tvShowPopularVM = new ViewModelProvider(this).get(TVShowPopularVM.class);
         tvShowPopularVM.setTvPopular();
-        tvShowPopularVM.getTvPopular().observe(this,getTvShow);
+        tvShowPopularVM.getTvPopular().observe(this,getTvPopular);
         rvTvPopular.setAdapter(tvShowAdapter);
     }
 
-    private Observer<ArrayList<TVShow>> getTvShow = new Observer<ArrayList<TVShow>>() {
+    private Observer<ArrayList<TVShow>> getTvPopular = new Observer<ArrayList<TVShow>>() {
         @Override
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
@@ -85,13 +82,13 @@ public class TvShowFragment extends Fragment {
         tvShowTopAdapter = new TVShowTopAdapter(getContext());
         tvShowTopAdapter.notifyDataSetChanged();
         rvTvTop.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        tvShowTopVM = new ViewModelProvider(this).get(TVShowTopVM.class);
+        TVShowTopVM tvShowTopVM = new ViewModelProvider(this).get(TVShowTopVM.class);
         tvShowTopVM.setTvTop();
-        tvShowTopVM.getTvTop().observe(this,getTvShowk);
+        tvShowTopVM.getTvTop().observe(this,getTvTop);
         rvTvTop.setAdapter(tvShowTopAdapter);
     }
 
-    private Observer<ArrayList<TVShow>> getTvShowk = new Observer<ArrayList<TVShow>>() {
+    private Observer<ArrayList<TVShow>> getTvTop = new Observer<ArrayList<TVShow>>() {
         @Override
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
@@ -104,13 +101,13 @@ public class TvShowFragment extends Fragment {
         tvShowTodayAdapter = new TVShowTodayAdapter(getContext());
         tvShowTodayAdapter.notifyDataSetChanged();
         rvTvToday.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        tvShowTodayVM = new ViewModelProvider(this).get(TVShowTodayVM.class);
+        TVShowTodayVM tvShowTodayVM = new ViewModelProvider(this).get(TVShowTodayVM.class);
         tvShowTodayVM.setTvToday();
-        tvShowTodayVM.getTvToday().observe(this,getTvShowkk);
+        tvShowTodayVM.getTvToday().observe(this,getTvToday);
         rvTvToday.setAdapter(tvShowTodayAdapter);
     }
 
-    private Observer<ArrayList<TVShow>> getTvShowkk = new Observer<ArrayList<TVShow>>() {
+    private Observer<ArrayList<TVShow>> getTvToday = new Observer<ArrayList<TVShow>>() {
         @Override
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){

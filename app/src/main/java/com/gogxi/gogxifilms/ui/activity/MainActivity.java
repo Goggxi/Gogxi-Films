@@ -14,32 +14,33 @@ import android.view.MenuItem;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.ui.adapter.FragmentAdapterPage;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
+    FragmentAdapterPage fragmentAdapterPage;
+    ViewPager viewPager;
+    Toolbar toolbar;
+    TabLayout tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FragmentAdapterPage fragmentAdapterPage = new FragmentAdapterPage(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        fragmentAdapterPage = new FragmentAdapterPage(this, getSupportFragmentManager());
+        viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(fragmentAdapterPage);
 
-        TabLayout tabs = findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        tabs.getTabAt(0).setIcon(R.drawable.ic_movie);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_tv_show);
-
-//        BadgeDrawable badgeDrawable = tabs.getTabAt(0).getOrCreateBadge();
-//        badgeDrawable.setVisible(true);
-//        badgeDrawable.setNumber(12);
+        Objects.requireNonNull(tabs.getTabAt(0)).setIcon(R.drawable.ic_movie);
+        Objects.requireNonNull(tabs.getTabAt(1)).setIcon(R.drawable.ic_tv_show);
 
     }
 

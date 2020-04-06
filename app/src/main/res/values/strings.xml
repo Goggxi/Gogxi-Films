@@ -5,4 +5,14 @@
     <string name="title_2">TV Show</string>
     <string name="language">en-US</string>
     <string name="details">Details</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="play_now">Play Now</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="banner">banner</string>
+    <string name="rate">rate</string>
+    <string name="lang">lang</string>
+    <string name="storyline">storyline</string>
+    <string name="language_setting">language_setting</string>
 </resources>

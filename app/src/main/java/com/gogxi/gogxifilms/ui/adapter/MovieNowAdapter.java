@@ -66,7 +66,7 @@ public class MovieNowAdapter extends RecyclerView.Adapter<MovieNowAdapter.ViewHo
         ImageView imgPosterMovie;
         TextView tvTitleMovie, tvRateMovie;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPosterMovie = itemView.findViewById(R.id.img_poster_items);
             tvTitleMovie = itemView.findViewById(R.id.tv_title_items);
