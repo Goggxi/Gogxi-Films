@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.Movie;
 import com.gogxi.gogxifilms.ui.activity.MovieDetailActivity;
@@ -28,7 +29,7 @@ public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapte
         return movie;
     }
 
-    private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
+    private static final String BASE_IMAGE_URL = BuildConfig.POSTER ;
 
     public MoviePopularAdapter(Context context) {
         this.context = context;

@@ -18,9 +18,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="today"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:text="Airing Today"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
             android:id="@+id/third_recycler_view"
@@ -36,9 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="popular"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:text="Top Rated"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
             android:id="@+id/first_recycler_view"
@@ -54,9 +56,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="top_rated"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:text="Popular"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
             android:id="@+id/second_recycler_view"

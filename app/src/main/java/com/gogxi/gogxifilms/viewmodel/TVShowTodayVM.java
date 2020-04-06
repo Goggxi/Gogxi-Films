@@ -25,7 +25,7 @@ public class TVShowTodayVM extends ViewModel {
             api = new Api();
         }
 
-        api.getUrl().getTVShowTodayr().enqueue(new Callback<TVShowResponse>() {
+        api.getUrl().getTVShowToday().enqueue(new Callback<TVShowResponse>() {
             @Override
             public void onResponse(Call<TVShowResponse> call, Response<TVShowResponse> response) {
                 TVShowResponse tvShowResponse = response.body();

@@ -23,5 +23,5 @@ public interface ApiRepo {
     @GET("3/tv/top_rated?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
     Call<TVShowResponse> getTVShowToprRated();
     @GET("3/tv/airing_today?api_key="+ BuildConfig.API_KEY + "&language="+ LANG)
-    Call<TVShowResponse> getTVShowTodayr();
+    Call<TVShowResponse> getTVShowToday();
 }

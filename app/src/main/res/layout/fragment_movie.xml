@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="today"
+            android:text="Popular"
             android:textColor="@color/colorAccentDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="today"
+            android:text="Play Now"
             android:textColor="@color/colorAccentDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="today"
+            android:text="Upcoming"
             android:textColor="@color/colorAccentDark"
             android:textSize="18sp"
             android:textStyle="bold" />

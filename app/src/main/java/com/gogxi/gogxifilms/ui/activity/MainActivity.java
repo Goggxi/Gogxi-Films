@@ -1,4 +1,4 @@
-package com.gogxi.gogxifilms;
+package com.gogxi.gogxifilms.ui.activity;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 
+import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.ui.adapter.FragmentAdapterPage;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
