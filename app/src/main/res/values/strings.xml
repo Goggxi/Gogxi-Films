@@ -16,4 +16,7 @@
     <string name="banner" translatable="false">banner</string>
     <string name="rate" translatable="false">rate</string>
     <string name="lang" translatable="false">lang</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

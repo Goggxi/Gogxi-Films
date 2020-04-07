@@ -10,18 +10,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.gogxi.gogxifilms.R;
+import com.gogxi.gogxifilms.ui.fragment.FavoriteFragment;
+import com.gogxi.gogxifilms.ui.fragment.MovieFavoritFragment;
 import com.gogxi.gogxifilms.ui.fragment.MovieFragment;
+import com.gogxi.gogxifilms.ui.fragment.TvFavoriteFragment;
 import com.gogxi.gogxifilms.ui.fragment.TvShowFragment;
 
 public class FragmentAdapterPage extends FragmentPagerAdapter {
-    private final Context mContext;
+    private final FavoriteFragment mContext;
 
     private final int[] TAB_TITLES = new int[]{
             R.string.title_1,
             R.string.title_2
     };
 
-    public FragmentAdapterPage(Context context, FragmentManager fm) {
+    public FragmentAdapterPage(FavoriteFragment context, FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
     }
@@ -32,7 +35,7 @@ public class FragmentAdapterPage extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new MovieFragment();
+                fragment = new MovieFavoritFragment();
                 break;
 
             case 1:

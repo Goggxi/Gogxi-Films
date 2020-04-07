@@ -20,7 +20,7 @@
             android:layout_margin="16dp"
             android:text="@string/airing_today"
             android:textColor="@color/colorAccentDark"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
@@ -39,7 +39,7 @@
             android:layout_margin="16dp"
             android:text="@string/top_rated"
             android:textColor="@color/colorAccentDark"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
@@ -58,7 +58,7 @@
             android:layout_margin="16dp"
             android:text="@string/popular"
             android:textColor="@color/colorAccentDark"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
@@ -70,7 +70,6 @@
             app:msrv_gravity="center"
             app:msrv_ms_per_inch="@dimen/speed"
             app:msrv_snap_count="2" />
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

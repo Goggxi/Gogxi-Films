@@ -8,7 +8,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_poster_items"
-            app:riv_corner_radius="8dp"
+            app:riv_corner_radius="6dp"
             android:layout_width="112dp"
             android:layout_height="144dp"
             android:src="@drawable/ic_launcher_background"/>
@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:textSize="12sp"
             tools:text="Title"
             android:maxLines="1"/>
         <RelativeLayout
@@ -37,7 +38,7 @@
                     android:id="@+id/tv_rate_items"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     tools:text="4.3"
                     android:layout_toEndOf="@id/rate"/>
