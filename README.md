@@ -9,5 +9,12 @@ Repository ini berisi source code submission 3.
 - [x] CollapsingToolbarLayout
 
 ## Tampilan Aplikasi
-<img src="./screenshots/1.png" width="50%" height="auto"> <img src="./screenshots/2.png" width="50%" height="auto">
-<img src="./screenshots/3.png" width="50%" height="auto"> <img src="./screenshots/4.png" width="50%" height="auto">
+<p align="center">
+  <img src="./screenshots/1.png" width="40%" alt="ss 1">
+  <img src="./screenshots/2.png" width="40%" alt="ss 2">
+  <img src="./screenshots/3.png" width="40%" alt="ss 3">
+  <img src="./screenshots/4.png" width="40%" alt="ss 4">
+</p>
+
+
+
