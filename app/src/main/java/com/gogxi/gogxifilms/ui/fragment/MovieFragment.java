@@ -1,6 +1,6 @@
 package com.gogxi.gogxifilms.ui.fragment;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,7 +32,6 @@ public class MovieFragment extends Fragment {
     private MovieUpcomingAdapter movieUpcomingAdapter;
     private MovieNowAdapter movieNowAdapter;
     private MultiSnapRecyclerView rvMovieNow, rvMoviePopular , rvMovieUpcoming;
-    private ProgressDialog dialog;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -54,17 +53,12 @@ public class MovieFragment extends Fragment {
         rvMovieNow = view.findViewById(R.id.rvSecond);
         rvMovieUpcoming = view.findViewById(R.id.rvThird);
 
-        dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("loading ...");
-        dialog.setCanceledOnTouchOutside(false);
-
         getPopular();
         getNow();
         getUpcoming();
     }
 
     private void getPopular(){
-        dialog.show();
         moviePopularAdapter = new MoviePopularAdapter(getContext());
         moviePopularAdapter.notifyDataSetChanged();
         rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -79,13 +73,11 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 moviePopularAdapter.setData(movie);
-                dialog.dismiss();
             }
         }
     };
 
     private void getNow(){
-        dialog.show();
         movieNowAdapter = new MovieNowAdapter(getContext());
         movieNowAdapter.notifyDataSetChanged();
         rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -100,13 +92,11 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieNowAdapter.setData(movie);
-                dialog.dismiss();
             }
         }
     };
 
     private void getUpcoming(){
-        dialog.show();
         movieUpcomingAdapter = new MovieUpcomingAdapter(getContext());
         movieUpcomingAdapter.notifyDataSetChanged();
         rvMovieUpcoming.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -121,7 +111,6 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieUpcomingAdapter.setData(movie);
-                dialog.dismiss();
             }
         }
     };

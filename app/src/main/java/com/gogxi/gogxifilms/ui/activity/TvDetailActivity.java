@@ -3,7 +3,6 @@ package com.gogxi.gogxifilms.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.TVShow;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,26 +22,18 @@ import java.util.Locale;
 public class TvDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_TV = "extra_tv";
-    TVShow tvShow;
-    Toolbar toolbar;
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    TextView title,release,language,rate,storyline;
-    ImageView poster, backDrop;
-    private ProgressDialog dialog;
+    private TVShow tvShow;
+    private TextView title,release,language,rate,storyline;
+    private ImageView poster, backDrop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_detail);
 
-        collapsingToolbarLayout = findViewById(R.id.collapse_toolbar);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("loading ...");
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         title = findViewById(R.id.tv_title);
         release = findViewById(R.id.tv_release);
@@ -78,7 +68,6 @@ public class TvDetailActivity extends AppCompatActivity {
                     .into(backDrop);
             getReleaseDate();
         }
-        dialog.dismiss();
     }
 
     private void getReleaseDate() {

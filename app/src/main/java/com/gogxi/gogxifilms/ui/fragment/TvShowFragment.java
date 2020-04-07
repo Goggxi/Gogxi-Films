@@ -34,7 +34,6 @@ public class TvShowFragment extends Fragment {
     private TVShowTopAdapter tvShowTopAdapter;
     private TVShowTodayAdapter tvShowTodayAdapter;
     private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
-    private ProgressDialog dialog;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -56,17 +55,12 @@ public class TvShowFragment extends Fragment {
         rvTvTop = view.findViewById(R.id.second_recycler_view);
         rvTvToday = view.findViewById(R.id.third_recycler_view);
 
-        dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("loading ...");
-        dialog.setCanceledOnTouchOutside(false);
-
         getPopular();
         getTop();
         getToday();
     }
 
     private void getPopular(){
-        dialog.show();
         tvShowAdapter = new TVShowAdapter(getContext());
         tvShowAdapter.notifyDataSetChanged();
         rvTvPopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -81,13 +75,11 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowAdapter.setData(tvPopular);
-                dialog.dismiss();
             }
         }
     };
 
     private void getTop(){
-        dialog.show();
         tvShowTopAdapter = new TVShowTopAdapter(getContext());
         tvShowTopAdapter.notifyDataSetChanged();
         rvTvTop.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -102,13 +94,11 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTopAdapter.setData(tvPopular);
-                dialog.dismiss();
             }
         }
     };
 
     private void getToday(){
-        dialog.show();
         tvShowTodayAdapter = new TVShowTodayAdapter(getContext());
         tvShowTodayAdapter.notifyDataSetChanged();
         rvTvToday.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -123,7 +113,6 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTodayAdapter.setData(tvPopular);
-                dialog.dismiss();
             }
         }
     };
