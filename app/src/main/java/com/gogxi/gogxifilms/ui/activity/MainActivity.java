@@ -20,9 +20,7 @@ import com.gogxi.gogxifilms.ui.fragment.TvShowFragment;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    ChipNavigationBar bottomNav;
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
 
     @Override
@@ -30,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        bottomNav = findViewById(R.id.bottom_nav);
+        ChipNavigationBar bottomNav = findViewById(R.id.bottom_nav);
 
         if (savedInstanceState==null){
             bottomNav.setItemSelected(R.id.movie, true);
