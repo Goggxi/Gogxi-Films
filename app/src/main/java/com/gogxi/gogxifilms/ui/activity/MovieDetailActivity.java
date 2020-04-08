@@ -53,6 +53,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         titleMovie = findViewById(R.id.tv_title);
         releaseMovie = findViewById(R.id.tv_release);
@@ -66,7 +67,13 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         toastAdd = getString(R.string.add_favorite);
         failed = getString(R.string.failed);
 
-        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        movieHelper = MovieHelper.getInstance(getApplicationContext());
+        movieHelper.open();
+        String movieId = Integer.toString(movie.getId());
+        favAdd = findViewById(R.id.favorite_add);
+        fabFavDel = findViewById(R.id.favorite_delete);
+        favAdd.setOnClickListener(this);
+        fabFavDel.setOnClickListener(this);
 
         setData();
 
@@ -75,15 +82,12 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        movieHelper = MovieHelper.getInstance(getApplicationContext());
-        movieHelper.open();
-        String movieId = Integer.toString(movie.getId());
 
-        favAdd = findViewById(R.id.favorite_add);
-        fabFavDel = findViewById(R.id.favorite_delete);
-        favAdd.setOnClickListener(this);
-        fabFavDel.setOnClickListener(this);
-
+        /*
+         * fungsi untuk mengecek id apakah sudah terdaftar di database
+         * dan untuk mengatur tombol favorit
+         * by. Gogxi (08-04-2020)
+         * */
 
         if (movieHelper.checkMovie(movieId)){
             favAdd.setVisibility(View.GONE);
@@ -91,6 +95,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         }
     }
 
+    /**
+     * fungsi untuk mengatur data yang berada di detai activity
+     * by. Gogxi (08-04-2020)
+     * */
     private void setData(){
         if (movie != null){
             titleMovie.setText(movie.getTitle());
@@ -126,6 +134,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         }
     }
 
+    /**
+     * fungsi untuk kembali ke halaman sebelumnya
+     * by. Gogxi (08-04-2020)
+     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -135,12 +147,15 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * fungsi untuk insert data ke database movie
+     * by. Gogxi (08-04-2020)
+     * */
     private void insertDB(){
         int movieId = movie.getId();
         String title = movie.getTitle();
         String date = movie.getReleaseDate();
-        int score = (int) movie.getVoteAverage();
+        int rate = (int) movie.getVoteAverage();
         String language = movie.getOriginalLanguage();
         String overview = movie.getOverview();
         String poster = movie.getPosterPath();
@@ -150,7 +165,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         values.put(MOVIE_ID, movieId);
         values.put(MOVIE_TITLE, title);
         values.put(MOVIE_DATE, date);
-        values.put(MOVIE_RATE, score);
+        values.put(MOVIE_RATE, rate);
         values.put(MOVIE_LANGUAGE, language);
         values.put(MOVIE_OVERVIEW, overview);
         values.put(MOVIE_POSTER, poster);
@@ -165,6 +180,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         }
     }
 
+    /**
+     * fungsi untuk menghapus data dari database berdasarkan id
+     * by. Gogxi (08-04-2020)
+     * */
     private void deleteDB(){
         long result = movieHelper.deleteById(String.valueOf(movie.getId()));
         if (result > 0) {

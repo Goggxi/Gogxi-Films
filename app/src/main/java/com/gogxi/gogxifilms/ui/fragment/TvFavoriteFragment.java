@@ -23,8 +23,7 @@ import java.util.ArrayList;
 public class TvFavoriteFragment extends Fragment {
     private RecyclerView recyclerView;
     private TVShowFavoriteAdapter adapter;
-    private TvHelper showHelper;
-    private ArrayList<TVShow> movieList;
+    private ArrayList<TVShow> tvList;
 
     public TvFavoriteFragment() {
         // Required empty public constructor
@@ -41,11 +40,11 @@ public class TvFavoriteFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new TVShowFavoriteAdapter(getContext());
-        showHelper = new TvHelper(getContext());
+        TvHelper showHelper = new TvHelper(getContext());
         showHelper.open();
-        movieList = new ArrayList<>();
-        movieList = showHelper.queryAll();
-        adapter.setData(movieList);
+        tvList = new ArrayList<>();
+        tvList = showHelper.queryAll();
+        adapter.setData(tvList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         return view;
@@ -56,8 +55,8 @@ public class TvFavoriteFragment extends Fragment {
         super.onStart();
         TvHelper item = new TvHelper(getContext());
         item.open();
-        movieList=item.queryAll();
-        adapter.setData(movieList);
+        tvList=item.queryAll();
+        adapter.setData(tvList);
         recyclerView.setAdapter(adapter);
     }
 }

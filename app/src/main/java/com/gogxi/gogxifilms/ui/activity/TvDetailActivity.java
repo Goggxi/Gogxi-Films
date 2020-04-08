@@ -51,6 +51,7 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        tvShow = getIntent().getParcelableExtra(EXTRA_TV);
 
         title = findViewById(R.id.tv_title);
         release = findViewById(R.id.tv_release);
@@ -64,17 +65,9 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         toastAdd = getString(R.string.add_favorite);
         failed = getString(R.string.failed);
 
-        tvShow = getIntent().getParcelableExtra(EXTRA_TV);
-        setData();
-
-        if (getSupportActionBar() != null ){
-            getSupportActionBar().setTitle(R.string.details);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         tvHelper = TvHelper.getInstance(getApplicationContext());
         tvHelper.open();
-        String movieId = Integer.toString(tvShow.getId());
+        String tvId = Integer.toString(tvShow.getId());
 
         favAdd = findViewById(R.id.favorite_add_tv);
         fabFavDel = findViewById(R.id.favorite_delete_tv);
@@ -82,7 +75,14 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         fabFavDel.setOnClickListener(this);
 
 
-        if (tvHelper.checkTvShow(movieId)){
+        setData();
+
+        if (getSupportActionBar() != null ){
+            getSupportActionBar().setTitle(R.string.details);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (tvHelper.checkTvShow(tvId)){
             favAdd.setVisibility(View.GONE);
             fabFavDel.setVisibility(View.VISIBLE);
         }
@@ -129,20 +129,20 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void insertDB(){
-        int movieId = tvShow.getId();
+        int tvId = tvShow.getId();
         String title = tvShow.getName();
         String date = tvShow.getFirstAirDate();
-        int score = (int) tvShow.getVoteAverage();
+        int rate = (int) tvShow.getVoteAverage();
         String language = tvShow.getOriginalLanguage();
         String overview = tvShow.getOverview();
         String poster = tvShow.getPosterPath();
         String back = tvShow.getBackdropPath();
 
         ContentValues values = new ContentValues();
-        values.put(TV_ID, movieId);
+        values.put(TV_ID, tvId);
         values.put(TV_TITLE, title);
         values.put(TV_DATE, date);
-        values.put(TV_RATE, score);
+        values.put(TV_RATE, rate);
         values.put(TV_LANGUAGE, language);
         values.put(TV_OVERVIEW, overview);
         values.put(TV_POSTER, poster);
