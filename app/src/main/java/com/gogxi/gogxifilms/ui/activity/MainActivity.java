@@ -4,9 +4,7 @@ package com.gogxi.gogxifilms.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,20 +14,13 @@ import android.view.MenuItem;
 
 
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.ui.adapter.FragmentAdapterPage;
 import com.gogxi.gogxifilms.ui.fragment.FavoriteFragment;
 import com.gogxi.gogxifilms.ui.fragment.MovieFragment;
 import com.gogxi.gogxifilms.ui.fragment.TvShowFragment;
-import com.google.android.material.tabs.TabLayout;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
-    FragmentAdapterPage fragmentAdapterPage;
-    ViewPager viewPager;
     Toolbar toolbar;
-    TabLayout tabs;
     ChipNavigationBar bottomNav;
     FragmentManager fragmentManager;
 
@@ -82,27 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        fragmentAdapterPage = new FragmentAdapterPage(this, getSupportFragmentManager());
-//        viewPager = findViewById(R.id.view_pager);
-//        viewPager.setAdapter(fragmentAdapterPage);
-//
-//        tabs = findViewById(R.id.tabs);
-//        tabs.setupWithViewPager(viewPager);
-//
-//        Objects.requireNonNull(tabs.getTabAt(0)).setIcon(R.drawable.ic_movie);
-//        Objects.requireNonNull(tabs.getTabAt(1)).setIcon(R.drawable.ic_tv_show);
-
     }
-
-//    public void getFavorite(){
-//        fragmentManager = getSupportFragmentManager();
-//        FavoriteFragment favoriteFragment = new FavoriteFragment();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container, favoriteFragment)
-//                .commit();
-//    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cnb_unselectedColor="#A3A3A3">
+    app:cnb_unselectedColor="@color/colorNoSelect">
 
     <item
         android:id="@+id/movie"
@@ -23,7 +23,7 @@
         android:id="@+id/favorite"
         android:icon="@drawable/ic_favorite"
         android:title="Favorite"
-        app:cnb_backgroundColor="#ff785b"
-        app:cnb_iconColor="#fff"
-        app:cnb_textColor="#fff" />
+        app:cnb_backgroundColor="@color/colorFavorite"
+        app:cnb_iconColor="@color/colorWhite"
+        app:cnb_textColor="@color/colorWhite" />
 </menu>
