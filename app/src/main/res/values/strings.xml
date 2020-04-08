@@ -12,15 +12,11 @@
     <string name="upcoming">Upcoming</string>
     <string name="storyline">Overview</string>
     <string name="language_setting">language_setting</string>
+    <string name="add_favorite">Added to Favorite</string>
+    <string name="delete_favorite">Deleted from favorite</string>
+    <string name="failed">Failed</string>
 
     <string name="no_fav_movie" translatable="false">HAHAHA no movie</string>
-    <string name="popularity" translatable="false">Popularity</string>
-    <string name="movie_poster" translatable="false">Movie Poster</string>
-    <string name="tv_show_poster" translatable="false">TV Show Poster</string>
-    <string name="addedtofav" translatable="false">Added to Favorite</string>
-    <string name="deletedfromfav" translatable="false">Deleted from favorite</string>
-    <string name="failed" translatable="false">Failed</string>
-    <string name="no_fav_tvshow" translatable="false">There are no favorite tv show</string>
 
     <string name="banner" translatable="false">banner</string>
     <string name="rate" translatable="false">rate</string>

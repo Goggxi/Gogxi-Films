@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             " %s INTEGER," +
                             " %s TEXT NOT NULL," +
                             " %s TEXT NOT NULL," +
-                            " %s TEXT NOT NULL," +
+                            " %s INTEGER," +
                             " %s TEXT NOT NULL," +
                             " %s TEXT NOT NULL," +
                             " %s TEXT NOT NULL," +

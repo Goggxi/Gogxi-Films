@@ -12,9 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.ui.fragment.FavoriteFragment;
 import com.gogxi.gogxifilms.ui.fragment.MovieFavoritFragment;
-import com.gogxi.gogxifilms.ui.fragment.MovieFragment;
 import com.gogxi.gogxifilms.ui.fragment.TvFavoriteFragment;
-import com.gogxi.gogxifilms.ui.fragment.TvShowFragment;
 
 public class FragmentAdapterPage extends FragmentPagerAdapter {
     private final FavoriteFragment mContext;
@@ -39,7 +37,7 @@ public class FragmentAdapterPage extends FragmentPagerAdapter {
                 break;
 
             case 1:
-                fragment = new TvShowFragment();
+                fragment = new TvFavoriteFragment();
                 break;
         }
         assert fragment != null;

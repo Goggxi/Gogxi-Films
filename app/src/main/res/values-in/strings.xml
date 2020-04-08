@@ -12,8 +12,7 @@
     <string name="upcoming">Mendatang</string>
     <string name="storyline">Kilasan Singkat</string>
     <string name="language_setting">Pengaturan Bahasa</string>
-
-    <string name="banner" translatable="false">banner</string>
-    <string name="rate" translatable="false">rate</string>
-    <string name="lang" translatable="false">lang</string>
+    <string name="add_favorite">Ditambahkan ke Favorit</string>
+    <string name="delete_favorite">Dihapus dari Favorit</string>
+    <string name="failed">Gagal</string>
 </resources>

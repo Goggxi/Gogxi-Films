@@ -3,10 +3,7 @@ package com.gogxi.gogxifilms.ui.activity;
 
 
 import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,8 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.data.db.DatabaseContract;
-import com.gogxi.gogxifilms.data.db.DatabaseHelper;
 import com.gogxi.gogxifilms.data.db.MovieHelper;
 import com.gogxi.gogxifilms.data.model.Movie;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_BACKRDOP;
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_DATE;
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_ID;
@@ -38,7 +34,6 @@ import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVI
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_OVERVIEW;
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_POSTER;
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_RATE;
-import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_TABLE_NAME;
 import static com.gogxi.gogxifilms.data.db.DatabaseContract.FavMovieColumns.MOVIE_TITLE;
 
 public class MovieDetailActivity extends AppCompatActivity  implements View.OnClickListener{
@@ -47,11 +42,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
     private Movie movie;
     private TextView titleMovie,releaseMovie,languageMovie,rateMovie,storylineMovie;
     private ImageView posterMovie, backDrop;
-
-
-
-    private FloatingActionButton fabFavAdd, fabFavDel;
+    private FloatingActionButton favAdd, fabFavDel;
     private MovieHelper movieHelper;
+    private String toastDel, failedd, toastAdd, failed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +62,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         posterMovie = findViewById(R.id.iv_poster);
         backDrop = findViewById(R.id.img_detail_photo_banner);
 
+        toastDel = getString(R.string.delete_favorite);
+        toastAdd = getString(R.string.add_favorite);
+        failed = getString(R.string.failed);
+
         movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         setData();
@@ -77,10 +75,20 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        fabFavAdd = findViewById(R.id.favorite_add);
+        movieHelper = MovieHelper.getInstance(getApplicationContext());
+        movieHelper.open();
+        String movieId = Integer.toString(movie.getId());
+
+        favAdd = findViewById(R.id.favorite_add);
         fabFavDel = findViewById(R.id.favorite_delete);
-        fabFavAdd.setOnClickListener(this);
+        favAdd.setOnClickListener(this);
         fabFavDel.setOnClickListener(this);
+
+
+        if (movieHelper.checkMovie(movieId)){
+            favAdd.setVisibility(View.GONE);
+            fabFavDel.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setData(){
@@ -101,6 +109,10 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         }
     }
 
+    /**
+     * fungsi untuk mengatur format tanggal
+     * by. Gogxi (08-04-2020)
+     * */
     private void getReleaseDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         String date = movie.getReleaseDate();
@@ -123,65 +135,62 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveFavorite() {
-        Log.d("POSTER", "saveFavorite: " + movie.getPosterPath());
-        movieHelper = new MovieHelper(this);
-        String poster = movie.getPosterPath();
-        String detailPoster = movie.getBackdropPath();
-        String movieName = movie.getTitle();
-        int movieVote = (int) movie.getVoteAverage();
+
+    private void insertDB(){
+        int movieId = movie.getId();
+        String title = movie.getTitle();
+        String date = movie.getReleaseDate();
+        int score = (int) movie.getVoteAverage();
+        String language = movie.getOriginalLanguage();
         String overview = movie.getOverview();
-        String releaseDate = movie.getReleaseDate();
-        String lang = movie.getOriginalLanguage();
+        String poster = movie.getPosterPath();
+        String back = movie.getBackdropPath();
 
-        movie.setTitle(movieName);
-        movie.setOverview(overview);
-        movie.setPosterPath(poster);
-        movie.setReleaseDate(releaseDate);
-        movie.setVoteAverage(movieVote);
-        movie.setBackdropPath(detailPoster);
-        movie.setOriginalLanguage(lang);
-
-        movieHelper.open();
-        movieHelper.insert(movie);
-        movieHelper.close();
+        ContentValues values = new ContentValues();
+        values.put(MOVIE_ID, movieId);
+        values.put(MOVIE_TITLE, title);
+        values.put(MOVIE_DATE, date);
+        values.put(MOVIE_RATE, score);
+        values.put(MOVIE_LANGUAGE, language);
+        values.put(MOVIE_OVERVIEW, overview);
+        values.put(MOVIE_POSTER, poster);
+        values.put(MOVIE_BACKRDOP, back);
+        long result = movieHelper.insert(values);
+        if (result > 0) {
+            favAdd.setVisibility(View.GONE);
+            fabFavDel.setVisibility(View.VISIBLE);
+            Toast.makeText(MovieDetailActivity.this, toastAdd, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MovieDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public boolean Exist(String item){
-        String selected = MOVIE_TITLE+" =?";
-        String[] selectedArgs={item};
-        String limit="1";
-        movieHelper= new MovieHelper(this);
-        movieHelper.open();
-        DatabaseHelper dataBaseHelper= new DatabaseHelper(MovieDetailActivity.this);
-        SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
-        Cursor cursor= database.query(MOVIE_TABLE_NAME,null,selected,selectedArgs,null,null,null,limit);
-        boolean exists;
-        exists=(cursor.getCount() > 0);
-        cursor.close();
-        movieHelper.close();
-        return exists;
+    private void deleteDB(){
+        long result = movieHelper.deleteById(String.valueOf(movie.getId()));
+        if (result > 0) {
+            Toast.makeText(MovieDetailActivity.this, toastDel, Toast.LENGTH_SHORT).show();
+            fabFavDel.setVisibility(View.GONE);
+            favAdd.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(MovieDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.favorite_delete) {
-            saveFavorite();
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-            fabFavDel.setVisibility(View.GONE);
-            fabFavAdd.setVisibility(View.VISIBLE);
-        } else if (v.getId() == R.id.favorite_add){
-            if (Exist(movie.getTitle())) {
-                Log.d("EXIST", "movies exist");
-                int movie_id = movie.getId();
-                movieHelper = new MovieHelper(MovieDetailActivity.this);
-                movieHelper.open();
-                movieHelper.deleteMovie(movie_id);
-                movieHelper.close();
-                Toast.makeText(getApplicationContext(), "Removed", Toast.LENGTH_LONG).show();
-                fabFavDel.setVisibility(View.VISIBLE);
-                fabFavAdd.setVisibility(View.GONE);
-            }
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.favorite_add :
+                insertDB();
+                break;
+            case R.id.favorite_delete:
+                deleteDB();
+                break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        movieHelper.close();
     }
 }

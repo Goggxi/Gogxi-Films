@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.db.MovieHelper;
 import com.gogxi.gogxifilms.data.model.Movie;
+import com.gogxi.gogxifilms.ui.adapter.MovieFavoriteAdapter;
 import com.gogxi.gogxifilms.ui.adapter.MovieNowAdapter;
 import com.gogxi.gogxifilms.ui.adapter.MoviePopularAdapter;
 import com.gogxi.gogxifilms.ui.adapter.MovieUpcomingAdapter;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
  */
 public class MovieFavoritFragment extends Fragment {
     private RecyclerView recyclerView;
-    private MoviePopularAdapter adapter;
+    private MovieFavoriteAdapter adapter;
     private MovieHelper showHelper;
     private ArrayList<Movie> movieList;
 
@@ -43,7 +44,6 @@ public class MovieFavoritFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,19 +51,9 @@ public class MovieFavoritFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_favorit, container, false);
         recyclerView = view.findViewById(R.id.rv_favorite_movie);
 
-//        adapter = new MoviePopularAdapter(getContext());
-//        adapter.notifyDataSetChanged();
-//        showHelper = new MovieHelper(getContext());
-//        showHelper.open();
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-//        MoviePopularVM moviePopularVM = new ViewModelProvider(this).get(MoviePopularVM.class);
-//        moviePopularVM.setMoviePopular(getString(R.string.language));
-//        moviePopularVM.getMoviePopular().observe(this,getMoviePopular);
-//        recyclerView.setAdapter(adapter);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new MoviePopularAdapter(getContext());
+        adapter = new MovieFavoriteAdapter(getContext());
         showHelper = new MovieHelper(getContext());
         showHelper.open();
         movieList = new ArrayList<>();
@@ -71,31 +61,12 @@ public class MovieFavoritFragment extends Fragment {
         adapter.setData(movieList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-
         return view;
     }
-//    private Observer<ArrayList<Movie>> getMoviePopular = new Observer<ArrayList<Movie>>() {
-//        @Override
-//        public void onChanged(ArrayList<Movie> movie) {
-//            if (movie != null){
-//                movie = showHelper.queryAll();
-//                adapter.setData(movie);
-//            }
-//        }
-//    };
 
     @Override
     public void onStart(){
         super.onStart();
-//        MovieHelper item = new MovieHelper(getContext());
-//        item.open();
-//        MoviePopularVM moviePopularVM = new ViewModelProvider(this).get(MoviePopularVM.class);
-//        moviePopularVM.setMoviePopular(getString(R.string.language));
-//        moviePopularVM.getMoviePopular().observe(this,getMoviePopular);
-//        recyclerView.setAdapter(adapter);
-
-
         MovieHelper item = new MovieHelper(getContext());
         item.open();
         movieList=item.queryAll();

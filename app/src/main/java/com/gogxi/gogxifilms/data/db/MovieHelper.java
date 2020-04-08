@@ -80,7 +80,7 @@ public class MovieHelper {
                 movie.setOriginalLanguage(cursor.getString(cursor.getColumnIndex(MOVIE_LANGUAGE)));
                 movie.setOverview(cursor.getString(cursor.getColumnIndex(MOVIE_OVERVIEW)));
                 movie.setPosterPath(cursor.getString(cursor.getColumnIndex(MOVIE_POSTER)));
-                movie.setBackdropPath(cursor.getString(cursor.getColumnIndex(MOVIE_POSTER)));
+                movie.setBackdropPath(cursor.getString(cursor.getColumnIndex(MOVIE_BACKRDOP)));
 
                 movieArrayList.add(movie);
 
@@ -101,29 +101,13 @@ public class MovieHelper {
                 , null);
     }
 
-//    public long insert(ContentValues values) {
-//        return database.insert(DATABASE_TABLE, null, values);
-//    }
 
-    public long insert(Movie movies) {
-        ContentValues conts = new ContentValues();
-        conts.put(MOVIE_ID, movies.getId());
-        conts.put(MOVIE_TITLE, movies.getTitle());
-        conts.put(MOVIE_RATE, movies.getVoteAverage());
-        conts.put(MOVIE_OVERVIEW, movies.getOverview());
-        conts.put(MOVIE_DATE, movies.getReleaseDate());
-        conts.put(MOVIE_LANGUAGE, movies.getOriginalLanguage());
-        conts.put(MOVIE_POSTER, movies.getPosterPath());
-        conts.put(MOVIE_BACKRDOP, movies.getBackdropPath());
-        return database.insert(DATABASE_TABLE, null, conts);
+    public long insert(ContentValues values) {
+        return database.insert(DATABASE_TABLE, null, values);
     }
 
     public int deleteById(String id) {
         return database.delete(DATABASE_TABLE, MOVIE_ID + " = ?", new String[]{id});
-    }
-
-    public int deleteMovie(int id) {
-        return database.delete(DATABASE_TABLE, MOVIE_ID + " = '" + id + "'", null);
     }
 
     public boolean checkMovie(String id) {
