@@ -32,7 +32,7 @@ public class TvHelper {
     private static TvHelper INSTANCE;
     private static SQLiteDatabase database;
 
-    private TvHelper(Context context) {
+    public TvHelper(Context context) {
         databaseHelper = new DatabaseHelper(context);
     }
 

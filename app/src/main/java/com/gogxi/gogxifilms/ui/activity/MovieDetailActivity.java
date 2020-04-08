@@ -44,7 +44,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
     private ImageView posterMovie, backDrop;
     private FloatingActionButton favAdd, fabFavDel;
     private MovieHelper movieHelper;
-    private String toastDel, failedd, toastAdd, failed;
+    private String toastDel, toastAdd, failed;
 
 
     @Override

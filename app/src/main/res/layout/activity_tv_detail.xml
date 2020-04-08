@@ -81,4 +81,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favorite_add_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#fff"
+        android:src="@drawable/ic_favorite"
+        app:tint="#6A6868"
+        app:maxImageSize="24dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favorite_delete_tv"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#ff785b"
+        android:src="@drawable/ic_favorite"
+        app:tint="@color/colorWhite"
+        app:maxImageSize="24dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
