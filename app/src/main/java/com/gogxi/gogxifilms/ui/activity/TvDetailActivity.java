@@ -2,12 +2,14 @@ package com.gogxi.gogxifilms.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.db.TvHelper;
 import com.gogxi.gogxifilms.data.model.TVShow;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
@@ -39,9 +42,12 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
     private TVShow tvShow;
     private TextView title,release,language,rate,storyline;
     private ImageView poster, backDrop;
-    private FloatingActionButton favAdd, fabFavDel;
+    private FloatingActionButton favAdd, favDel;
     private TvHelper tvHelper;
     private String toastDel, toastAdd, failed;
+    private NestedScrollView nestedScrollView;
+    private AppBarLayout appBarLayout;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,10 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         poster = findViewById(R.id.iv_poster);
         backDrop = findViewById(R.id.img_detail_photo_banner);
 
+        nestedScrollView = findViewById(R.id.nestedScrollView_tv);
+        appBarLayout = findViewById(R.id.appbar_tv);
+        progressBar = findViewById(R.id.progress_tv_detail);
+
         toastDel = getString(R.string.delete_favorite);
         toastAdd = getString(R.string.add_favorite);
         failed = getString(R.string.failed);
@@ -70,9 +80,9 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         String tvId = Integer.toString(tvShow.getId());
 
         favAdd = findViewById(R.id.favorite_add_tv);
-        fabFavDel = findViewById(R.id.favorite_delete_tv);
+        favDel = findViewById(R.id.favorite_delete_tv);
         favAdd.setOnClickListener(this);
-        fabFavDel.setOnClickListener(this);
+        favDel.setOnClickListener(this);
 
 
         setData();
@@ -82,9 +92,11 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        showLoading(true);
+
         if (tvHelper.checkTvShow(tvId)){
             favAdd.setVisibility(View.GONE);
-            fabFavDel.setVisibility(View.VISIBLE);
+            favDel.setVisibility(View.VISIBLE);
         }
     }
 
@@ -103,6 +115,7 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
                     .apply(new RequestOptions().override(500, 350))
                     .into(backDrop);
             getReleaseDate();
+            showLoading(false);
         }
     }
 
@@ -150,7 +163,7 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         long result = tvHelper.insert(values);
         if (result > 0) {
             favAdd.setVisibility(View.GONE);
-            fabFavDel.setVisibility(View.VISIBLE);
+            favDel.setVisibility(View.VISIBLE);
             Toast.makeText(TvDetailActivity.this, toastAdd, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(TvDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
@@ -161,7 +174,7 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         long result = tvHelper.deleteById(String.valueOf(tvShow.getId()));
         if (result > 0) {
             Toast.makeText(TvDetailActivity.this, toastDel, Toast.LENGTH_SHORT).show();
-            fabFavDel.setVisibility(View.GONE);
+            favDel.setVisibility(View.GONE);
             favAdd.setVisibility(View.VISIBLE);
         } else {
             Toast.makeText(TvDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
@@ -184,5 +197,18 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
         tvHelper.close();
+    }
+
+    private void showLoading(boolean state) {
+        if (state){
+            progressBar.setVisibility(View.GONE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+            appBarLayout.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            nestedScrollView.setVisibility(View.GONE);
+            appBarLayout.setVisibility(View.GONE);
+            favDel.setVisibility(View.GONE);
+        }
     }
 }

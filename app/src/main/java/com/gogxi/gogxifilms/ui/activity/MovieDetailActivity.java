@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,6 +21,7 @@ import com.gogxi.gogxifilms.BuildConfig;
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.db.MovieHelper;
 import com.gogxi.gogxifilms.data.model.Movie;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
@@ -42,9 +45,12 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
     private Movie movie;
     private TextView titleMovie,releaseMovie,languageMovie,rateMovie,storylineMovie;
     private ImageView posterMovie, backDrop;
-    private FloatingActionButton favAdd, fabFavDel;
+    private FloatingActionButton favAdd, favDel;
     private MovieHelper movieHelper;
-    private String toastDel, toastAdd, failed;
+    private String toastDel, toastAdd, failed, id;
+    private NestedScrollView nestedScrollView;
+    private AppBarLayout appBarLayout;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -63,17 +69,21 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         posterMovie = findViewById(R.id.iv_poster);
         backDrop = findViewById(R.id.img_detail_photo_banner);
 
+        nestedScrollView = findViewById(R.id.nestedScrollView);
+        appBarLayout = findViewById(R.id.appbar);
+        progressBar = findViewById(R.id.progress_movie_detail);
+
         toastDel = getString(R.string.delete_favorite);
         toastAdd = getString(R.string.add_favorite);
         failed = getString(R.string.failed);
 
         movieHelper = MovieHelper.getInstance(getApplicationContext());
         movieHelper.open();
-        String movieId = Integer.toString(movie.getId());
+        id = Integer.toString(movie.getId());
         favAdd = findViewById(R.id.favorite_add);
-        fabFavDel = findViewById(R.id.favorite_delete);
+        favDel = findViewById(R.id.favorite_delete);
         favAdd.setOnClickListener(this);
-        fabFavDel.setOnClickListener(this);
+        favDel.setOnClickListener(this);
 
         setData();
 
@@ -81,6 +91,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
             getSupportActionBar().setTitle(R.string.details);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        showLoading(true);
 
 
         /*
@@ -88,10 +99,9 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
          * dan untuk mengatur tombol favorit
          * by. Gogxi (08-04-2020)
          * */
-
-        if (movieHelper.checkMovie(movieId)){
+        if (movieHelper.checkMovie(id)){
             favAdd.setVisibility(View.GONE);
-            fabFavDel.setVisibility(View.VISIBLE);
+            favDel.setVisibility(View.VISIBLE);
         }
     }
 
@@ -114,6 +124,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
                     .apply(new RequestOptions().override(500, 350))
                     .into(backDrop);
             getReleaseDate();
+            showLoading(false);
         }
     }
 
@@ -173,7 +184,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         long result = movieHelper.insert(values);
         if (result > 0) {
             favAdd.setVisibility(View.GONE);
-            fabFavDel.setVisibility(View.VISIBLE);
+            favDel.setVisibility(View.VISIBLE);
             Toast.makeText(MovieDetailActivity.this, toastAdd, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MovieDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
@@ -188,7 +199,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
         long result = movieHelper.deleteById(String.valueOf(movie.getId()));
         if (result > 0) {
             Toast.makeText(MovieDetailActivity.this, toastDel, Toast.LENGTH_SHORT).show();
-            fabFavDel.setVisibility(View.GONE);
+            favDel.setVisibility(View.GONE);
             favAdd.setVisibility(View.VISIBLE);
         } else {
             Toast.makeText(MovieDetailActivity.this, failed, Toast.LENGTH_SHORT).show();
@@ -211,5 +222,18 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
     protected void onDestroy() {
         super.onDestroy();
         movieHelper.close();
+    }
+
+    private void showLoading(boolean state) {
+        if (state){
+            progressBar.setVisibility(View.GONE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+            appBarLayout.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            nestedScrollView.setVisibility(View.GONE);
+            appBarLayout.setVisibility(View.GONE);
+            favDel.setVisibility(View.GONE);
+        }
     }
 }

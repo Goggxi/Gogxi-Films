@@ -8,8 +8,16 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.TvDetailActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_tv_detail"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/appbar_tv"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@android:color/transparent"
@@ -50,7 +58,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+        android:id="@+id/nestedScrollView_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">

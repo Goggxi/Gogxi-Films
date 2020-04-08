@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.Movie;
@@ -32,6 +34,8 @@ public class MovieFragment extends Fragment {
     private MovieUpcomingAdapter movieUpcomingAdapter;
     private MovieNowAdapter movieNowAdapter;
     private MultiSnapRecyclerView rvMovieNow, rvMoviePopular , rvMovieUpcoming;
+    private ProgressBar progressBar;
+    NestedScrollView nestedScrollView;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -52,10 +56,13 @@ public class MovieFragment extends Fragment {
         rvMoviePopular = view.findViewById(R.id.rvFrist);
         rvMovieNow = view.findViewById(R.id.rvSecond);
         rvMovieUpcoming = view.findViewById(R.id.rvThird);
+        progressBar = view.findViewById(R.id.progress_movie);
+        nestedScrollView = view.findViewById(R.id.my_scrol_view);
 
         getPopular();
         getNow();
         getUpcoming();
+        showLoading(false);
     }
 
     private void getPopular(){
@@ -73,6 +80,7 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 moviePopularAdapter.setData(movie);
+                showLoading(true);
             }
         }
     };
@@ -92,6 +100,7 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieNowAdapter.setData(movie);
+                showLoading(true);
             }
         }
     };
@@ -111,7 +120,18 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieUpcomingAdapter.setData(movie);
+                showLoading(true);
             }
         }
     };
+
+    private void showLoading(boolean state) {
+        if (state){
+            progressBar.setVisibility(View.GONE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            nestedScrollView.setVisibility(View.GONE);
+        }
+    }
 }

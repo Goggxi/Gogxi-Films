@@ -16,8 +16,6 @@
     <string name="delete_favorite">Deleted from favorite</string>
     <string name="failed">Failed</string>
 
-    <string name="no_fav_movie" translatable="false">HAHAHA no movie</string>
-
     <string name="banner" translatable="false">banner</string>
     <string name="rate" translatable="false">rate</string>
     <string name="lang" translatable="false">lang</string>

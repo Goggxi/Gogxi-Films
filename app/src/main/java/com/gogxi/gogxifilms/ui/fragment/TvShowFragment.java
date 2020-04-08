@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.TVShow;
@@ -34,6 +36,8 @@ public class TvShowFragment extends Fragment {
     private TVShowTopAdapter tvShowTopAdapter;
     private TVShowTodayAdapter tvShowTodayAdapter;
     private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
+    ProgressBar progressBar;
+    NestedScrollView nestedScrollView;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -54,10 +58,13 @@ public class TvShowFragment extends Fragment {
         rvTvPopular = view.findViewById(R.id.first_recycler_view);
         rvTvTop = view.findViewById(R.id.second_recycler_view);
         rvTvToday = view.findViewById(R.id.third_recycler_view);
+        progressBar = view.findViewById(R.id.progress_tv);
+        nestedScrollView = view.findViewById(R.id.scroll_tv);
 
         getPopular();
         getTop();
         getToday();
+        showLoading(false);
     }
 
     private void getPopular(){
@@ -75,6 +82,7 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowAdapter.setData(tvPopular);
+                showLoading(true);
             }
         }
     };
@@ -94,6 +102,7 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTopAdapter.setData(tvPopular);
+                showLoading(true);
             }
         }
     };
@@ -113,7 +122,18 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTodayAdapter.setData(tvPopular);
+                showLoading(true);
             }
         }
     };
+
+    private void showLoading(boolean state) {
+        if (state){
+            progressBar.setVisibility(View.GONE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            nestedScrollView.setVisibility(View.GONE);
+        }
+    }
 }
