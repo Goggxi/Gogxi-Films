@@ -24,7 +24,7 @@ public class MoviePopularAdapter extends RecyclerView.Adapter<MoviePopularAdapte
     private ArrayList<Movie> movie = new ArrayList<>();
     private Context context;
 
-    private ArrayList<Movie> getMovies() {
+    public ArrayList<Movie> getMovies() {
         return movie;
     }
 

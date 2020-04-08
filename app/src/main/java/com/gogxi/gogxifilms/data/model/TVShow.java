@@ -17,23 +17,11 @@ public class TVShow implements Parcelable {
 	@SerializedName("original_language")
 	private String originalLanguage;
 
-	@SerializedName("genre_ids")
-	private List<Integer> genreIds;
-
 	@SerializedName("poster_path")
 	private String posterPath;
 
-	@SerializedName("origin_country")
-	private List<String> originCountry;
-
 	@SerializedName("backdrop_path")
 	private String backdropPath;
-
-	@SerializedName("original_name")
-	private String originalName;
-
-	@SerializedName("popularity")
-	private double popularity;
 
 	@SerializedName("vote_average")
 	private double voteAverage;
@@ -44,22 +32,19 @@ public class TVShow implements Parcelable {
 	@SerializedName("id")
 	private int id;
 
-	@SerializedName("vote_count")
-	private int voteCount;
-
-	protected TVShow(Parcel in) {
+	private TVShow(Parcel in) {
 		firstAirDate = in.readString();
 		overview = in.readString();
 		originalLanguage = in.readString();
 		posterPath = in.readString();
-		originCountry = in.createStringArrayList();
 		backdropPath = in.readString();
-		originalName = in.readString();
-		popularity = in.readDouble();
 		voteAverage = in.readDouble();
 		name = in.readString();
 		id = in.readInt();
-		voteCount = in.readInt();
+	}
+
+	public TVShow() {
+
 	}
 
 	public static final Creator<TVShow> CREATOR = new Creator<TVShow>() {
@@ -98,14 +83,6 @@ public class TVShow implements Parcelable {
 		return originalLanguage;
 	}
 
-	public void setGenreIds(List<Integer> genreIds){
-		this.genreIds = genreIds;
-	}
-
-	public List<Integer> getGenreIds(){
-		return genreIds;
-	}
-
 	public void setPosterPath(String posterPath){
 		this.posterPath = posterPath;
 	}
@@ -114,36 +91,12 @@ public class TVShow implements Parcelable {
 		return posterPath;
 	}
 
-	public void setOriginCountry(List<String> originCountry){
-		this.originCountry = originCountry;
-	}
-
-	public List<String> getOriginCountry(){
-		return originCountry;
-	}
-
 	public void setBackdropPath(String backdropPath){
 		this.backdropPath = backdropPath;
 	}
 
 	public String getBackdropPath(){
 		return backdropPath;
-	}
-
-	public void setOriginalName(String originalName){
-		this.originalName = originalName;
-	}
-
-	public String getOriginalName(){
-		return originalName;
-	}
-
-	public void setPopularity(double popularity){
-		this.popularity = popularity;
-	}
-
-	public double getPopularity(){
-		return popularity;
 	}
 
 	public void setVoteAverage(double voteAverage){
@@ -170,31 +123,18 @@ public class TVShow implements Parcelable {
 		return id;
 	}
 
-	public void setVoteCount(int voteCount){
-		this.voteCount = voteCount;
-	}
-
-	public int getVoteCount(){
-		return voteCount;
-	}
-
 	@Override
  	public String toString(){
 		return 
 			"ResultsItem{" + 
 			"first_air_date = '" + firstAirDate + '\'' + 
 			",overview = '" + overview + '\'' + 
-			",original_language = '" + originalLanguage + '\'' + 
-			",genre_ids = '" + genreIds + '\'' + 
-			",poster_path = '" + posterPath + '\'' + 
-			",origin_country = '" + originCountry + '\'' + 
-			",backdrop_path = '" + backdropPath + '\'' + 
-			",original_name = '" + originalName + '\'' + 
-			",popularity = '" + popularity + '\'' + 
+			",original_language = '" + originalLanguage + '\'' +
+			",poster_path = '" + posterPath + '\'' +
+			",backdrop_path = '" + backdropPath + '\'' +
 			",vote_average = '" + voteAverage + '\'' + 
 			",name = '" + name + '\'' + 
-			",id = '" + id + '\'' + 
-			",vote_count = '" + voteCount + '\'' + 
+			",id = '" + id + '\'' +
 			"}";
 		}
 
@@ -209,13 +149,9 @@ public class TVShow implements Parcelable {
 		dest.writeString(overview);
 		dest.writeString(originalLanguage);
 		dest.writeString(posterPath);
-		dest.writeStringList(originCountry);
 		dest.writeString(backdropPath);
-		dest.writeString(originalName);
-		dest.writeDouble(popularity);
 		dest.writeDouble(voteAverage);
 		dest.writeString(name);
 		dest.writeInt(id);
-		dest.writeInt(voteCount);
 	}
 }
