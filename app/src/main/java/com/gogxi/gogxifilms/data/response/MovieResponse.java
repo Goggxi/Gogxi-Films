@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.gogxi.gogxifilms.data.model.Movie;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MovieResponse {
 
 	@SerializedName("page")
@@ -19,38 +21,18 @@ public class MovieResponse {
 	@SerializedName("total_results")
 	private int totalResults;
 
-	public void setPage(int page){
+	public MovieResponse(int page, int totalPages, ArrayList<Movie> results, int totalResults) {
 		this.page = page;
-	}
-
-	public int getPage(){
-		return page;
-	}
-
-	public void setTotalPages(int totalPages){
 		this.totalPages = totalPages;
-	}
-
-	public int getTotalPages(){
-		return totalPages;
-	}
-
-	public void setResults(ArrayList<Movie> results){
 		this.results = results;
+		this.totalResults = totalResults;
 	}
 
 	public ArrayList<Movie> getResults(){
 		return results;
 	}
 
-	public void setTotalResults(int totalResults){
-		this.totalResults = totalResults;
-	}
-
-	public int getTotalResults(){
-		return totalResults;
-	}
-
+	@NotNull
 	@Override
  	public String toString(){
 		return 

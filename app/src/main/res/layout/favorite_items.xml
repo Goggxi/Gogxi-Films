@@ -64,7 +64,8 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 tools:text="4.3"
-                android:layout_toEndOf="@id/rate"/>
+                android:layout_toEndOf="@id/rate"
+                tools:ignore="SmallSp" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -86,7 +87,8 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 tools:text="en"
-                android:layout_toEndOf="@id/lang"/>
+                android:layout_toEndOf="@id/lang"
+                tools:ignore="SmallSp" />
         </RelativeLayout>
 
     </LinearLayout>
