@@ -1,10 +1,11 @@
 package com.gogxi.gogxifilms.ui.fragment;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.Movie;
@@ -32,7 +34,8 @@ public class MovieFragment extends Fragment {
     private MovieUpcomingAdapter movieUpcomingAdapter;
     private MovieNowAdapter movieNowAdapter;
     private MultiSnapRecyclerView rvMovieNow, rvMoviePopular , rvMovieUpcoming;
-    private ProgressDialog dialog;
+    private ProgressBar mProgressBar;
+    private NestedScrollView mNestedScrollView;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -53,10 +56,10 @@ public class MovieFragment extends Fragment {
         rvMoviePopular = view.findViewById(R.id.rvFrist);
         rvMovieNow = view.findViewById(R.id.rvSecond);
         rvMovieUpcoming = view.findViewById(R.id.rvThird);
+        mProgressBar = view.findViewById(R.id.mProgress_movie);
+        mNestedScrollView = view.findViewById(R.id.mScroll_movie);
 
-        dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("loading ...");
-        dialog.setCanceledOnTouchOutside(false);
+        showLoading(false);
 
         getPopular();
         getNow();
@@ -64,7 +67,6 @@ public class MovieFragment extends Fragment {
     }
 
     private void getPopular(){
-        dialog.show();
         moviePopularAdapter = new MoviePopularAdapter(getContext());
         moviePopularAdapter.notifyDataSetChanged();
         rvMoviePopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -79,13 +81,12 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 moviePopularAdapter.setData(movie);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
 
     private void getNow(){
-        dialog.show();
         movieNowAdapter = new MovieNowAdapter(getContext());
         movieNowAdapter.notifyDataSetChanged();
         rvMovieNow.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -100,13 +101,12 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieNowAdapter.setData(movie);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
 
     private void getUpcoming(){
-        dialog.show();
         movieUpcomingAdapter = new MovieUpcomingAdapter(getContext());
         movieUpcomingAdapter.notifyDataSetChanged();
         rvMovieUpcoming.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -121,8 +121,18 @@ public class MovieFragment extends Fragment {
         public void onChanged(ArrayList<Movie> movie) {
             if (movie != null){
                 movieUpcomingAdapter.setData(movie);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
+
+    private void showLoading(boolean state) {
+        if (state){
+            mProgressBar.setVisibility(View.GONE);
+            mNestedScrollView.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mNestedScrollView.setVisibility(View.GONE);
+        }
+    }
 }

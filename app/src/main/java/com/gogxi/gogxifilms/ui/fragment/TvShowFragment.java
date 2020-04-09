@@ -1,10 +1,11 @@
 package com.gogxi.gogxifilms.ui.fragment;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.TVShow;
@@ -34,7 +36,8 @@ public class TvShowFragment extends Fragment {
     private TVShowTopAdapter tvShowTopAdapter;
     private TVShowTodayAdapter tvShowTodayAdapter;
     private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
-    private ProgressDialog dialog;
+    private ProgressBar mProgressBar;
+    private NestedScrollView mNestedScrollView;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -55,10 +58,10 @@ public class TvShowFragment extends Fragment {
         rvTvPopular = view.findViewById(R.id.first_recycler_view);
         rvTvTop = view.findViewById(R.id.second_recycler_view);
         rvTvToday = view.findViewById(R.id.third_recycler_view);
+        mProgressBar = view.findViewById(R.id.mProgress_tv);
+        mNestedScrollView = view.findViewById(R.id.mScroll_tv);
 
-        dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("loading ...");
-        dialog.setCanceledOnTouchOutside(false);
+        showLoading(false);
 
         getPopular();
         getTop();
@@ -66,7 +69,6 @@ public class TvShowFragment extends Fragment {
     }
 
     private void getPopular(){
-        dialog.show();
         tvShowAdapter = new TVShowAdapter(getContext());
         tvShowAdapter.notifyDataSetChanged();
         rvTvPopular.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -81,13 +83,12 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowAdapter.setData(tvPopular);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
 
     private void getTop(){
-        dialog.show();
         tvShowTopAdapter = new TVShowTopAdapter(getContext());
         tvShowTopAdapter.notifyDataSetChanged();
         rvTvTop.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -102,13 +103,12 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTopAdapter.setData(tvPopular);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
 
     private void getToday(){
-        dialog.show();
         tvShowTodayAdapter = new TVShowTodayAdapter(getContext());
         tvShowTodayAdapter.notifyDataSetChanged();
         rvTvToday.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -123,8 +123,18 @@ public class TvShowFragment extends Fragment {
         public void onChanged(ArrayList<TVShow> tvPopular) {
             if (tvPopular != null){
                 tvShowTodayAdapter.setData(tvPopular);
-                dialog.dismiss();
+                showLoading(true);
             }
         }
     };
+
+    private void showLoading(boolean state) {
+        if (state){
+            mProgressBar.setVisibility(View.GONE);
+            mNestedScrollView.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mNestedScrollView.setVisibility(View.GONE);
+        }
+    }
 }
