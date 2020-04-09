@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(tabs.getTabAt(0)).setIcon(R.drawable.ic_movie);
         Objects.requireNonNull(tabs.getTabAt(1)).setIcon(R.drawable.ic_tv_show);
+        Objects.requireNonNull(tabs.getTabAt(2)).setIcon(R.drawable.ic_favorite);
 
     }
 
