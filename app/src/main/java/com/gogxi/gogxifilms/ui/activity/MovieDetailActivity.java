@@ -47,7 +47,9 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
     private ImageView posterMovie, backDrop;
     private FloatingActionButton favAdd, favDel;
     private MovieHelper movieHelper;
-    private String toastDel, toastAdd, failed, id;
+    private String toastDel;
+    private String toastAdd;
+    private String failed;
     private NestedScrollView nestedScrollView;
     private AppBarLayout appBarLayout;
     private ProgressBar progressBar;
@@ -79,7 +81,7 @@ public class MovieDetailActivity extends AppCompatActivity  implements View.OnCl
 
         movieHelper = MovieHelper.getInstance(getApplicationContext());
         movieHelper.open();
-        id = Integer.toString(movie.getId());
+        String id = Integer.toString(movie.getId());
         favAdd = findViewById(R.id.favorite_add);
         favDel = findViewById(R.id.favorite_delete);
         favAdd.setOnClickListener(this);

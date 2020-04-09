@@ -28,7 +28,7 @@ public class MovieFavoriteAdapter extends RecyclerView.Adapter<MovieFavoriteAdap
     private ArrayList<Movie> movie = new ArrayList<>();
     private Context context;
 
-    public ArrayList<Movie> getMovies() {
+    private ArrayList<Movie> getMovies() {
         return movie;
     }
 

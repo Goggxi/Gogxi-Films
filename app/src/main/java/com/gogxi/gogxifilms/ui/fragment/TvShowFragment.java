@@ -1,6 +1,6 @@
 package com.gogxi.gogxifilms.ui.fragment;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,8 +36,8 @@ public class TvShowFragment extends Fragment {
     private TVShowTopAdapter tvShowTopAdapter;
     private TVShowTodayAdapter tvShowTodayAdapter;
     private MultiSnapRecyclerView rvTvPopular, rvTvTop, rvTvToday;
-    ProgressBar progressBar;
-    NestedScrollView nestedScrollView;
+    private ProgressBar progressBar;
+    private NestedScrollView nestedScrollView;
 
     public TvShowFragment() {
         // Required empty public constructor

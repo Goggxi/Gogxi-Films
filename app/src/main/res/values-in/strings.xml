@@ -3,6 +3,7 @@
 
     <string name="title_1">Film</string>
     <string name="title_2">Serial TV</string>
+    <string name="title_3">Favorit</string>
     <string name="language">id-ID</string>
     <string name="details">Detail</string>
     <string name="airing_today">Sedang Tayang</string>

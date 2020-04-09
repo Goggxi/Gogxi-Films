@@ -65,7 +65,7 @@ public class TVShowTopAdapter extends RecyclerView.Adapter<TVShowTopAdapter.View
         ImageView imgPoster;
         TextView tvTitle, tvRate;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPoster = itemView.findViewById(R.id.img_poster_items);
             tvTitle = itemView.findViewById(R.id.tv_title_items);

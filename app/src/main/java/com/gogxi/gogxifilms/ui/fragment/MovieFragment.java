@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.Movie;
@@ -35,7 +36,8 @@ public class MovieFragment extends Fragment {
     private MovieNowAdapter movieNowAdapter;
     private MultiSnapRecyclerView rvMovieNow, rvMoviePopular , rvMovieUpcoming;
     private ProgressBar progressBar;
-    NestedScrollView nestedScrollView;
+    private NestedScrollView nestedScrollView;
+
 
     public MovieFragment() {
         // Required empty public constructor
@@ -58,6 +60,7 @@ public class MovieFragment extends Fragment {
         rvMovieUpcoming = view.findViewById(R.id.rvThird);
         progressBar = view.findViewById(R.id.progress_movie);
         nestedScrollView = view.findViewById(R.id.my_scrol_view);
+
 
         getPopular();
         getNow();

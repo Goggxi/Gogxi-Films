@@ -3,8 +3,10 @@ package com.gogxi.gogxifilms.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.NotNull;
 
 public class TVShow implements Parcelable {
 
@@ -123,6 +125,7 @@ public class TVShow implements Parcelable {
 		return id;
 	}
 
+	@NotNull
 	@Override
  	public String toString(){
 		return 

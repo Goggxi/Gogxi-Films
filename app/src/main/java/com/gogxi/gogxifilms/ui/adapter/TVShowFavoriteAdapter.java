@@ -28,7 +28,7 @@ public class TVShowFavoriteAdapter extends RecyclerView.Adapter<TVShowFavoriteAd
     private ArrayList<TVShow> tvShow = new ArrayList<>();
     private Context context;
 
-    public ArrayList<TVShow> getTv() {
+    private ArrayList<TVShow> getTv() {
         return tvShow;
     }
 

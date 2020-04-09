@@ -4,27 +4,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gogxi.gogxifilms.R;
-import com.gogxi.gogxifilms.ui.adapter.FragmentAdapterPage;
-import com.google.android.material.tabs.TabLayout;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoriteFragment extends Fragment {
-
-    FragmentAdapterPage fragmentAdapterPage ;
-    ViewPager viewPager;
-    TabLayout tabs;
+    private FragmentManager fragmentManager;;
 
     public FavoriteFragment() {
         // Required empty public constructor
@@ -43,13 +37,38 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ChipNavigationBar bottomNav = view.findViewById(R.id.bottom_nav);
 
+        if (savedInstanceState==null){
+            bottomNav.setItemSelected(R.id.movie, true);
+            fragmentManager = getChildFragmentManager();
+            MovieFavoritFragment homeFragment = new MovieFavoritFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, homeFragment)
+                    .commit();
 
-        fragmentAdapterPage = new FragmentAdapterPage(this, getChildFragmentManager());
-        viewPager = view.findViewById(R.id.view_pager);
-        viewPager.setAdapter(fragmentAdapterPage);
+        }
 
-        tabs = view.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int id) {
+                Fragment fragment = null;
+                switch (id){
+                    case R.id.movie :
+                        fragment = new MovieFavoritFragment();
+                        break;
+                    case R.id.tvShow :
+                        fragment = new TvFavoriteFragment();
+                        break;
+                }
+
+                if (fragment != null) {
+                    fragmentManager = getChildFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
+                }
+            }
+        });
     }
 }
