@@ -16,4 +16,5 @@
     <string name="add_favorite">Ditambahkan ke Favorit</string>
     <string name="delete_favorite">Dihapus dari Favorit</string>
     <string name="failed">Gagal</string>
+    <string name="is_empty">kosong</string>
 </resources>

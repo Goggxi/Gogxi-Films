@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.db.TvHelper;
@@ -17,13 +18,11 @@ import com.gogxi.gogxifilms.ui.adapter.TVShowFavoriteAdapter;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class TvFavoriteFragment extends Fragment {
     private RecyclerView recyclerView;
     private TVShowFavoriteAdapter adapter;
-    private ArrayList<TVShow> tvList;
+    private TextView textView;
 
     public TvFavoriteFragment() {
         // Required empty public constructor
@@ -35,28 +34,33 @@ public class TvFavoriteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_favorite, container, false);
+        textView = view.findViewById(R.id.tvnone);
         recyclerView = view.findViewById(R.id.rv_favorite_tv);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new TVShowFavoriteAdapter(getContext());
+        stement();
+        return view;
+    }
+
+    private void stement(){
         TvHelper showHelper = new TvHelper(getContext());
         showHelper.open();
-        tvList = new ArrayList<>();
+        ArrayList<TVShow> tvList;
         tvList = showHelper.queryAll();
         adapter.setData(tvList);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        return view;
+        if(adapter.getItemCount() != 0){
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            textView.setVisibility(View.GONE);
+        } else {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        TvHelper item = new TvHelper(getContext());
-        item.open();
-        tvList=item.queryAll();
-        adapter.setData(tvList);
-        recyclerView.setAdapter(adapter);
+        stement();
     }
 }

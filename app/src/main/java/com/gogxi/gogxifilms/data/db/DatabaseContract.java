@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 public class DatabaseContract {
 
     public static final class FavMovieColumns implements BaseColumns {
-        public static final String MOVIE_TABLE_NAME = "favorite_movie";
+        static final String MOVIE_TABLE_NAME = "favorite_movie";
         public static final String MOVIE_ID = "movie_id";
         public static final String MOVIE_TITLE = "title";
         public static final String MOVIE_DATE = "date";
@@ -17,7 +17,7 @@ public class DatabaseContract {
     }
 
     public static final class FavTvShowColumns implements BaseColumns {
-        public static final String TV_TABLE_NAME = "favorite_tvshow";
+        static final String TV_TABLE_NAME = "favorite_tvshow";
         public static final String TV_ID = "tvshow_id";
         public static final String TV_TITLE = "title";
         public static final String TV_DATE = "date";

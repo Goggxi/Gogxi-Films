@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.TvFavoriteFragment">
 
+    <TextView
+        android:id="@+id/tvnone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/is_empty"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_tv"
         android:layout_width="match_parent"

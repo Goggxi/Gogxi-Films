@@ -91,17 +91,6 @@ public class MovieHelper {
         return movieArrayList;
     }
 
-    public Cursor queryById(String id) {
-        return database.query(DATABASE_TABLE, null
-                , _ID + " = ?"
-                , new String[]{id}
-                , null
-                , null
-                , null
-                , null);
-    }
-
-
     public long insert(ContentValues values) {
         return database.insert(DATABASE_TABLE, null, values);
     }

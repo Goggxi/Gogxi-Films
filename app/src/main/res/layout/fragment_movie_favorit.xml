@@ -9,8 +9,10 @@
         android:id="@+id/tvNone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="data kosong"
+        android:text="@string/is_empty"
+        android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         android:layout_centerInParent="true"/>
 
     <androidx.recyclerview.widget.RecyclerView

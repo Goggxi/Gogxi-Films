@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.gogxi.gogxifilms.R;
 import com.gogxi.gogxifilms.data.model.Movie;

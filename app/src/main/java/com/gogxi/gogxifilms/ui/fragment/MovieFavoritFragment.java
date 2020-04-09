@@ -29,8 +29,7 @@ import java.util.ArrayList;
 public class MovieFavoritFragment extends Fragment {
     private RecyclerView recyclerView;
     private MovieFavoriteAdapter adapter;
-    private ArrayList<Movie> movieList;
-    private TextView mTextView;
+    private TextView textView;
 
 
     public MovieFavoritFragment() {
@@ -41,35 +40,38 @@ public class MovieFavoritFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_movie_favorit, container, false);
+        return inflater.inflate(R.layout.fragment_movie_favorit, container, false);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textView = view.findViewById(R.id.tvNone);
         recyclerView = view.findViewById(R.id.rv_favorite_movie);
-        mTextView = view.findViewById(R.id.tvNone);
-
-
-        mTextView.setVisibility(View.GONE);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new MovieFavoriteAdapter(getContext());
+        stement();
+    }
+
+    private void stement(){
         MovieHelper showHelper = new MovieHelper(getContext());
         showHelper.open();
-        movieList = new ArrayList<>();
+        ArrayList<Movie> movieList;
         movieList = showHelper.queryAll();
         adapter.setData(movieList);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        return view;
+        if(adapter.getItemCount() != 0){
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            textView.setVisibility(View.GONE);
+        } else {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        MovieHelper item = new MovieHelper(getContext());
-        item.open();
-        movieList=item.queryAll();
-        adapter.setData(movieList);
-        recyclerView.setAdapter(adapter);
+        stement();
     }
 }

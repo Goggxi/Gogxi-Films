@@ -14,9 +14,6 @@ import android.view.ViewGroup;
 import com.gogxi.gogxifilms.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FavoriteFragment extends Fragment {
     private FragmentManager fragmentManager;;
 

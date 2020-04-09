@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     TV_BACKRDOP
             );
 
-    public DatabaseHelper(@Nullable Context context) {
+    DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
